@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AIT AI Studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0f1a;
+  color: #fff;
+}
+
+/* Banner */
+.banner {
+  width: 100%;
+  height: 300px;
+  background: url("day.jpg") center/cover no-repeat;
+}
+
+/* Container */
+.container {
+  max-width: 700px;
+  margin: -60px auto 50px;
+  background: #11162a;
+  padding: 25px;
+  border-radius: 15px;
+}
+
+/* Header */
+h1 {
+  text-align: center;
+  color: #ff4fd8;
+}
+
+/* Toggle */
+.toggle {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.toggle button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  background: #1f2a48;
+  color: #fff;
+  font-size: 15px;
+}
+
+.toggle button.active {
+  background: linear-gradient(90deg, #ff4fd8, #6f5cff);
+}
+
+/* Form */
+label {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: none;
+  background: #1f2a48;
+  color: #fff;
+  font-size: 15px;
+}
+
+button.submit {
+  width: 100%;
+  margin-top: 25px;
+  padding: 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #ff4fd8, #6f5cff);
+  color: #fff;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Banner -->
+<div class="banner"></div>
+
+<div class="container">
+<h1>Africa AI Studio </h1>
+
+<!-- Toggle -->
+<div class="toggle">
+  <button id="devBtn" class="active" onclick="showDeveloper()">Developer</button>
+  <button id="designBtn" onclick="showDesign()">Design</button>
+</div>
+
+<!-- Common Fields -->
+<label>Name</label>
+<input type="text" id="name" placeholder="Full Name">
+
+<label>Age</label>
+<input type="number" id="age" value="21">
+
+<!-- Developer Form -->
+<div id="developerForm">
+  <label>Department</label>
+  <input type="text" value="Software Development and Engineering" disabled>
+
+  <label>Course</label>
+  <select id="devCourse">
+    <option>Frontend Development – 2 weeks</option>
+    <option>Backend Development – 2 weeks</option>
+    <option>Full Stack Development – 2 weeks</option>
+  </select>
+</div>
+
+<!-- Design Form -->
+<div id="designForm" class="hidden">
+  <label>Department</label>
+  <input type="text" value="Software Design and Innovation" disabled>
+
+  <label>Course</label>
+  <select id="designCourse">
+    <option>Logo Design – 2 weeks</option>
+    <option>Visual Design – 2 weeks</option>
+    <option>Graphic Design – 2 weeks</option>
+  </select>
+</div>
+
+<button class="submit" onclick="openAI()">Open AI Studio</button>
+</div>
+
+<script>
+let mode = "developer";
+
+function showDeveloper() {
+  mode = "developer";
+  document.getElementById("developerForm").classList.remove("hidden");
+  document.getElementById("designForm").classList.add("hidden");
+  document.getElementById("devBtn").classList.add("active");
+  document.getElementById("designBtn").classList.remove("active");
+}
+
+function showDesign() {
+  mode = "design";
+  document.getElementById("designForm").classList.remove("hidden");
+  document.getElementById("developerForm").classList.add("hidden");
+  document.getElementById("designBtn").classList.add("active");
+  document.getElementById("devBtn").classList.remove("active");
+}
+
+function openAI() {
+  const name = document.getElementById("name").value;
+  const age = document.getElementById("age").value;
+
+  if (!name) {
+    alert("Please enter your name");
+    return;
+  }
+
+  let department, course, url;
+
+  if (mode === "developer") {
+    department = "Software Development and Engineering";
+    course = document.getElementById("devCourse").value;
+    url = "https://chat.openai.com/";
+  } else {
+    department = "Software Design and Innovation";
+    course = document.getElementById("designCourse").value;
+    url = "https://gemini.google.com/";
+  }
+
+  const prompt = `
+Hi AI,
+
+My name is ${name}, I am ${age} years old.
+I am a student at Africa Institution of Technology (AIT).
+
+Department: ${department}
+Course: ${course}
+
+Africa Institution of Technology operates under
+BlackLogic Technologies Hardware and Projects Pty Ltd,
+founded by BlackLogic Mkholo.
+
+Please teach me step-by-step,
+use real-world examples,
+and guide me to professional mastery.
+`;
+
+  navigator.clipboard.writeText(prompt).then(() => {
+    alert("AI prompt copied! Paste it into the AI assistant 🚀");
+    window.open(url, "_blank");
+  });
+}
+</script>
+
+</body>
+</html>

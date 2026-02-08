@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa Institution of Technology – Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+  body {
+    background: #0a0a0a;
+    color: #ff69b4;
+    font-family: 'Courier New', monospace;
+  }
+  .banner {
+    width: 100%;
+    height: 300px;
+    background: url('bash.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    position: relative;
+    box-shadow: 0 0 20px #00ffff;
+  }
+  .hamburger {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #ff69b4;
+  }
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  .sidenav a {
+    padding: 10px 30px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #ff69b4;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+  }
+  .sidenav a i {
+    margin-right: 1rem;
+  }
+  .sidenav a:hover {
+    background-color: #222;
+    color: #00ffff;
+  }
+  .sidenav .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 2rem;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .grid-card {
+    background: rgba(20,20,20,0.9);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 0 15px #00ffff;
+    transition: transform 0.3s;
+  }
+  .grid-card:hover {
+    transform: scale(1.05);
+  }
+  .grid-card img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1rem;
+  }
+  .grid-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .grid-card p {
+    color: #00ffff;
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- Banner -->
+<div class="banner">
+  <span class="hamburger" onclick="openNav()"><i class="fas fa-bars"></i></span>
+  <h1 class="text-3xl font-bold text-cyan-400"></h1>
+</div>
+
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+  <a href="dashboard.html"><i class="fas fa-home"></i>Dashboard</a>
+  <a href="courses.html"><i class="fas fa-book"></i>Courses</a>
+  <a href="instruction.html"><i class="fas fa-chalkboard-teacher"></i>Instructions</a>
+  <a href="admin.html"><i class="fas fa-user-cog"></i>Admin</a>
+  <a href="code.html"><i class="fas fa-code"></i>Code Studio</a>
+  <a href="design.html"><i class="fas fa-paint-brush"></i>Design Studio</a>
+
+  <!-- NEW AI STUDIO -->
+  <a href="aistudio.html"><i class="fas fa-microchip"></i>AI Studio</a>
+
+  <a href="live.html"><i class="fas fa-video"></i>Live</a>
+  <a href="project.html"><i class="fas fa-tasks"></i>Projects</a>
+</div>
+<!-- Include Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<!-- Departments Grid -->
+<div class="grid-container" style="display:grid; gap:2rem; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); padding:2rem;">
+
+  <!-- Software Design and Innovation -->
+  <div class="grid-card" style="background:#111; color:#ff69b4; border-radius:16px; padding:1.5rem; box-shadow:0 0 20px #00ffff; text-align:center;">
+    <i class="fas fa-paint-brush fa-3x mb-3"></i>
+    <h3>Department of Software Design and Innovation</h3>
+    <ul style="list-style:none; padding:0; margin-top:1rem; text-align:left;">
+      <li><i class="fas fa-check-circle"></i> Logo Design – <strong>2 weeks</strong></li>
+      <li><i class="fas fa-check-circle"></i> Visual Design – <strong>2 weeks</strong></li>
+      <li><i class="fas fa-check-circle"></i> Graphic Design – <strong>2 weeks</strong></li>
+    </ul>
+  </div>
+
+  <!-- Software Development and Engineering -->
+  <div class="grid-card" style="background:#111; color:#ff69b4; border-radius:16px; padding:1.5rem; box-shadow:0 0 20px #00ffff; text-align:center;">
+    <i class="fas fa-laptop-code fa-3x mb-3"></i>
+    <h3>Department of Software Development and Engineering</h3>
+    <ul style="list-style:none; padding:0; margin-top:1rem; text-align:left;">
+      <li><i class="fas fa-check-circle"></i> Frontend Development – <strong>2 weeks</strong></li>
+      <li><i class="fas fa-check-circle"></i> Backend Development – <strong>2 weeks</strong></li>
+      <li><i class="fas fa-check-circle"></i> Full Stack Development – <strong>2 weeks</strong></li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+
+</body>
+</html>

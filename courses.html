@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AIT | Courses</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      background: #000;
+      color: #ff69b4;
+      font-family: "Courier New", monospace;
+    }
+    .card {
+      background: #0b0b0b;
+      border: 1px solid #222;
+      border-radius: 14px;
+      box-shadow: 0 0 16px rgba(255,105,180,0.15);
+    }
+    .toggle-bg {
+      background: #111;
+      border: 1px solid #ff69b4;
+    }
+    .toggle-dot {
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ================= SLIDING BANNER ================= -->
+<section class="w-full h-[300px] relative overflow-hidden">
+  <!-- Slides -->
+  <div id="slides" class="w-full h-full flex transition-transform duration-700">
+    <div class="w-full h-full flex-shrink-0 bg-cover bg-center"
+      style="background-image:url('coding.jpg')"></div>
+    <div class="w-full h-full flex-shrink-0 bg-cover bg-center"
+      style="background-image:url('designer.jpg')"></div>
+    <div class="w-full h-full flex-shrink-0 bg-cover bg-center"
+      style="background-image:url('stack.png')"></div>
+  </div>
+
+  <!-- Overlay Text -->
+  <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/50">
+    <h1 class="text-4xl font-bold text-pink-400">Courses</h1>
+    <p class="text-gray-300 mt-2 text-center px-4">
+      Choose your learning path at Africa Institution of Technology
+    </p>
+  </div>
+</section>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+const slides = document.getElementById('slides');
+const totalSlides = slides.children.length;
+let currentIndex = 0;
+
+function showNextSlide() {
+  currentIndex = (currentIndex + 1) % totalSlides;
+  slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+// Auto slide every 4 seconds
+setInterval(showNextSlide, 4000);
+</script>
+
+<!-- ================= TOGGLE SWITCH ================= -->
+<section class="flex justify-center mt-10">
+  <div class="toggle-bg rounded-full px-2 py-2 flex items-center gap-4">
+    <span id="devLabel"
+      class="font-bold text-black bg-pink-400 px-4 py-1 rounded-full">
+      Developer
+    </span>
+
+    <div class="relative w-14 h-7 bg-black rounded-full cursor-pointer"
+      onclick="toggleTrack()">
+      <div id="toggleDot"
+        class="toggle-dot absolute left-1 top-1 w-5 h-5 bg-pink-400 rounded-full">
+      </div>
+    </div>
+
+    <span id="designLabel"
+      class="font-bold text-pink-400 px-4 py-1 rounded-full">
+      Designer
+    </span>
+  </div>
+</section>
+
+<!-- ================= CONTENT ================= -->
+<section class="max-w-4xl mx-auto mt-12 px-4 pb-24">
+
+<!-- ===== DEVELOPER ===== -->
+<div id="developerSection">
+
+  <h2 class="text-xl font-bold mb-6">
+    Department of Software Development and Engineering
+  </h2>
+
+  <div class="card p-5 mb-4">
+    <h3 class="font-bold text-lg flex items-center gap-2">
+      <i class="fas fa-code"></i> Frontend Development
+    </h3>
+    <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
+    <p class="text-gray-300 mb-4">
+      Build responsive, interactive user interfaces using modern web technologies.
+    </p>
+    <a href="frontend.html"
+      class="inline-block bg-pink-400 text-black px-5 py-2 rounded font-bold">
+      ▶ Start Learning
+    </a>
+  </div>
+
+  <div class="card p-5 mb-4">
+    <h3 class="font-bold text-lg flex items-center gap-2">
+      <i class="fas fa-server"></i> Backend Development
+    </h3>
+    <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
+    <p class="text-gray-300 mb-4">
+      Learn server-side logic, APIs, databases, and system architecture.
+    </p>
+    <a href="backend.html"
+      class="inline-block bg-pink-400 text-black px-5 py-2 rounded font-bold">
+      ▶ Start Learning
+    </a>
+  </div>
+
+  <div class="card p-5 mb-6">
+    <h3 class="font-bold text-lg flex items-center gap-2">
+      <i class="fas fa-layer-group"></i> Full Stack Development
+    </h3>
+    <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
+    <p class="text-gray-300 mb-4">
+      Combine frontend and backend skills to build complete applications.
+    </p>
+    <a href="fullstack.html"
+      class="inline-block bg-pink-400 text-black px-5 py-2 rounded font-bold">
+      ▶ Start Learning
+    </a>
+  </div>
+
+  <!-- NB -->
+  <div class="border border-pink-400/40 rounded-xl p-5 text-gray-300">
+    <p class="font-bold text-pink-400 mb-2">
+      ⚠️ NB:
+    </p>
+    <ul class="list-disc pl-5 space-y-2">
+      <li>🎓 Each course comes with a qualification certificate.</li>
+      <li>
+        🔓 Completion of all <strong>3 Developer courses</strong> unlocks a
+        <strong class="text-pink-400">credited qualification in Software Engineering</strong>.
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ===== DESIGNER ===== -->
+<div id="designerSection" class="hidden">
+
+  <h2 class="text-xl font-bold mb-6">
+    Department of Software Design and Innovation
+  </h2>
+
+  <div class="card p-5 mb-4">
+    <h3 class="font-bold text-lg flex items-center gap-2">
+      <i class="fas fa-pen-nib"></i> Logo Design
+    </h3>
+    <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
+    <p class="text-gray-300 mb-4">
+      Learn branding, identity creation, and professional logo design.
+    </p>
+    <a href="designer.html"
+      class="inline-block bg-pink-400 text-black px-5 py-2 rounded font-bold">
+      ▶ Start Learning
+    </a>
+  </div>
+
+  <div class="card p-5 mb-4">
+    <h3 class="font-bold text-lg flex items-center gap-2">
+      <i class="fas fa-eye"></i> Visual Design
+    </h3>
+    <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
+    <p class="text-gray-300 mb-4">
+      Master layout systems, colour theory, and visual hierarchy.
+    </p>
+    <a href="designer2.html"
+      class="inline-block bg-pink-400 text-black px-5 py-2 rounded font-bold">
+      ▶ Start Learning
+    </a>
+  </div>
+
+  <div class="card p-5 mb-6">
+    <h3 class="font-bold text-lg flex items-center gap-2">
+      <i class="fas fa-palette"></i> Graphic Design
+    </h3>
+    <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
+    <p class="text-gray-300 mb-4">
+      Create posters, banners, and digital designs professionally.
+    </p>
+    <a href="graphic.html"
+      class="inline-block bg-pink-400 text-black px-5 py-2 rounded font-bold">
+      ▶ Start Learning
+    </a>
+  </div>
+
+  <!-- NB -->
+  <div class="border border-pink-400/40 rounded-xl p-5 text-gray-300">
+    <p class="font-bold text-pink-400 mb-2">
+      ⚠️ NB:
+    </p>
+    <ul class="list-disc pl-5 space-y-2">
+      <li>🎨 Each course comes with a qualification certificate.</li>
+      <li>
+        🔓 Completion of all <strong>3 Design courses</strong> unlocks a
+        <strong class="text-pink-400">credited qualification in Software Design</strong>.
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+</section>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+let isDeveloper = true;
+
+function toggleTrack() {
+  const dot = document.getElementById("toggleDot");
+  const dev = document.getElementById("developerSection");
+  const des = document.getElementById("designerSection");
+  const devLabel = document.getElementById("devLabel");
+  const desLabel = document.getElementById("designLabel");
+
+  if (isDeveloper) {
+    dot.style.left = "32px";
+    dev.classList.add("hidden");
+    des.classList.remove("hidden");
+    devLabel.classList.remove("bg-pink-400","text-black");
+    devLabel.classList.add("text-pink-400");
+    desLabel.classList.add("bg-pink-400","text-black");
+    desLabel.classList.remove("text-pink-400");
+  } else {
+    dot.style.left = "4px";
+    des.classList.add("hidden");
+    dev.classList.remove("hidden");
+    desLabel.classList.remove("bg-pink-400","text-black");
+    desLabel.classList.add("text-pink-400");
+    devLabel.classList.add("bg-pink-400","text-black");
+    devLabel.classList.remove("text-pink-400");
+  }
+  isDeveloper = !isDeveloper;
+}
+</script>
+
+</body>
+</html>

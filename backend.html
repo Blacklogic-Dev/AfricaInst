@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Backend Development – AIT Courses</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #ff69b4;
+      font-family: 'Courier New', monospace;
+    }
+    .card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 14px;
+      box-shadow: 0 0 15px rgba(255,105,180,0.15);
+    }
+    .btn:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= BANNER ================= -->
+  <section class="w-full h-[300px] flex items-center justify-center bg-cover bg-center"
+    style="background-image:url('coding.jpg')">
+    <div class="bg-black/80 p-8 rounded-xl border border-pink-400 text-center">
+      <h1 class="text-4xl font-bold">Backend Development</h1>
+      <p class="text-gray-300 mt-2">
+        Learn backend development and Python fundamentals
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= INSTRUCTIONS ================= -->
+  <section class="max-w-4xl mx-auto mt-6 px-4">
+    <p class="text-pink-400 font-bold mb-2">Instructions:</p>
+    <ul class="list-decimal list-inside text-gray-300 mb-4">
+      <li>Watch the video lessons completely</li>
+      <li>Copy the Module instructions using the clipboard button</li>
+      <li>Click the AI button, paste the prompt, and start learning</li>
+    </ul>
+    <button class="btn px-4 py-2 bg-green-500 text-black rounded flex items-center gap-2" 
+            onclick="window.open('https://chat.openai.com', '_blank')">
+      <i class="fas fa-robot"></i> Open AI Assistant
+    </button>
+  </section>
+
+  <!-- ================= MODULES ================= -->
+  <section class="max-w-4xl mx-auto mt-6 px-4 space-y-6">
+
+    <!-- Module 1 -->
+    <div class="card p-4">
+      <h2 class="font-bold text-lg mb-2">Module 1 – Introduction to Python <span class="text-gray-400">(YouTube)</span></h2>
+      <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/rfscVS0vtbw" allowfullscreen></iframe>
+      <p class="text-gray-300 mb-3">Get introduced to Python programming language and environment setup.</p>
+      <div class="flex gap-3">
+        <button class="btn px-4 py-2 bg-pink-400 text-black rounded copy-btn" 
+                data-prompt="Introduction to Python programming language and environment setup.">
+          <i class="fas fa-clipboard"></i> Copy Prompt
+        </button>
+      
+      </div>
+    </div>
+
+    <!-- Module 2 -->
+    <div class="card p-4">
+      <h2 class="font-bold text-lg mb-2">Module 2 – Learning Python Fundamentals <span class="text-gray-400">(YouTube)</span></h2>
+      <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/_uQrJ0TkZlc" allowfullscreen></iframe>
+      <p class="text-gray-300 mb-3">Learn variables, data types, loops, and basic Python programming skills.</p>
+      <div class="flex gap-3">
+        <button class="btn px-4 py-2 bg-pink-400 text-black rounded copy-btn" 
+                data-prompt="Learn variables, data types, loops, and basic Python programming skills.">
+          <i class="fas fa-clipboard"></i> Copy Prompt
+        </button>
+    
+      </div>
+    </div>
+
+    <!-- Module 3 -->
+    <div class="card p-4">
+      <h2 class="font-bold text-lg mb-2">Module 3 – Introduction to Backend Development with Python Django and Flask <span class="text-gray-400">(YouTube)</span></h2>
+      <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/F5mRW0jo-U4" allowfullscreen></iframe>
+      <p class="text-gray-300 mb-3">Learn how to set up Django and Flask projects and understand backend structure.</p>
+      <div class="flex gap-3">
+        <button class="btn px-4 py-2 bg-pink-400 text-black rounded copy-btn" 
+                data-prompt="Learn how to set up Django and Flask projects and understand backend structure.">
+          <i class="fas fa-clipboard"></i> Copy Prompt
+        </button>
+  
+      </div>
+    </div>
+
+<!-- Module 4 -->
+<div class="card p-4">
+  <h2 class="font-bold text-lg mb-2">
+    Module 4 – How Backend and Frontend Connect 
+    <span class="text-gray-400">(YouTube)</span>
+  </h2>
+  <iframe class="w-full h-60 mb-3" 
+          src="https://www.youtube.com/embed/pHQj9dVw5OA?si=mPduTBo4_JAHyooY" 
+          allowfullscreen>
+  </iframe>
+  <p class="text-gray-300 mb-3">
+    Understand how APIs and server-side logic interact with frontend applications.
+  </p>
+  <div class="flex gap-3">
+    <button class="btn px-4 py-2 bg-pink-400 text-black rounded copy-btn" 
+            data-prompt="Understand how APIs and server-side logic interact with frontend applications.">
+      <i class="fas fa-clipboard"></i> Copy Prompt
+    </button>
+   
+  </div>
+</div>
+
+    <!-- Module 5 -->
+    <div class="card p-4">
+      <h2 class="font-bold text-lg mb-2">Module 5 – Databases <span class="text-gray-400">(YouTube)</span></h2>
+      <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/HXV3zeQKqGY" allowfullscreen></iframe>
+      <p class="text-gray-300 mb-3">Introduction to databases, SQL, and connecting Python applications to a database.</p>
+      <div class="flex gap-3">
+        <button class="btn px-4 py-2 bg-pink-400 text-black rounded copy-btn" 
+                data-prompt="Introduction to databases, SQL, and connecting Python applications to a database.">
+          <i class="fas fa-clipboard"></i> Copy Prompt
+        </button>
+     
+      </div>
+    </div>
+
+    <!-- Module 6 -->
+    <div class="card p-4">
+      <h2 class="font-bold text-lg mb-2">Module 6 – Backend and Databases <span class="text-gray-400">(YouTube)</span></h2>
+      <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/9ylj9NR0Lcg" allowfullscreen></iframe>
+      <p class="text-gray-300 mb-3">Learn to integrate backend logic with database operations for dynamic applications.</p>
+      <div class="flex gap-3">
+        <button class="btn px-4 py-2 bg-pink-400 text-black rounded copy-btn" 
+                data-prompt="Learn to integrate backend logic with database operations for dynamic applications.">
+          <i class="fas fa-clipboard"></i> Copy Prompt
+        </button>
+    
+      </div>
+    </div>
+
+    <!-- Module 7 -->
+    <div class="card p-4">
+      <h2 class="font-bold text-lg mb-2">Module 7 – Introduction to Machine Learning with Python <span class="text-gray-400">(YouTube)</span></h2>
+      <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/GwIo3gDZCVQ" allowfullscreen></iframe>
+      <p class="text-gray-300 mb-3">Learn basic machine learning concepts and implement simple models using Python.</p>
+      <div class="flex gap-3">
+        <button class="btn px-4 py-2 bg-pink-400 text-black rounded copy-btn" 
+                data-prompt="Learn basic machine learning concepts and implement simple models using Python.">
+          <i class="fas fa-clipboard"></i> Copy Prompt
+        </button>
+   
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ================= SCRIPT ================= -->
+  <script>
+    document.querySelectorAll(".copy-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        navigator.clipboard.writeText(btn.dataset.prompt);
+        alert("Prompt copied to clipboard!");
+      });
+    });
+
+    document.querySelectorAll(".ai-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        // Open ChatGPT for developer
+        if(btn.dataset.type === "developer") {
+          window.open("https://chat.openai.com/", "_blank");
+        } else {
+          // For designer / Gemini
+          window.open("https://www.bing.com/create", "_blank");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

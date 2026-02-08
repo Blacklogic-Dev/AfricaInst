@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIT | Projects & Assignments</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+  background:#0a0a0a;
+  color:#ff69b4;
+  font-family:Courier New, monospace;
+  padding:20px;
+}
+
+.container {
+  max-width:800px;
+  margin:auto;
+}
+
+.card {
+  background:#111;
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 0 20px #00ffff;
+  margin-bottom:30px;
+}
+
+h2 {
+  text-align:center;
+  margin-bottom:15px;
+}
+
+select, input {
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:8px;
+  border:none;
+  background:#222;
+  color:#ff69b4;
+}
+
+.toggle {
+  display:flex;
+  justify-content:center;
+  margin-bottom:15px;
+}
+
+.toggle button {
+  padding:8px 18px;
+  margin:0 5px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  background:#222;
+  color:#ff69b4;
+  font-weight:bold;
+}
+
+.toggle button.active {
+  background:#ff69b4;
+  color:#000;
+}
+
+button.generate {
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  margin-top:10px;
+  background:#00ffff;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+pre.result {
+  background:#fff;
+  color:#000;
+  padding:15px;
+  margin-top:15px;
+  border-radius:10px;
+  display:none;
+  white-space:pre-wrap;
+}
+
+.download {
+  margin-top:10px;
+  background:#ff69b4;
+  color:#000;
+  border:none;
+  padding:10px;
+  width:100%;
+  border-radius:10px;
+  cursor:pointer;
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- ASSIGNMENT 1 -->
+  <div class="card">
+    <h2>Assignment 1 – Project Build</h2>
+
+    <div class="toggle">
+      <button id="dev1" class="active" onclick="setMode(1,'Developer')">Developer</button>
+      <button id="des1" onclick="setMode(1,'Designer')">Designer</button>
+    </div>
+
+    <input type="text" id="sid1" placeholder="Student ID" required>
+
+    <select id="dept1">
+      <option>Software Development & Engineering</option>
+      <option>Software Design & Innovation</option>
+    </select>
+
+    <select id="course1">
+      <option>Frontend Development</option>
+      <option>Backend Development</option>
+      <option>Full Stack Development</option>
+      <option>Logo Design</option>
+      <option>Visual Design</option>
+      <option>Graphic Design</option>
+    </select>
+
+    <button class="generate" onclick="generateProject(1)">Generate Project</button>
+
+    <pre class="result" id="result1"></pre>
+    <button class="download" id="download1" onclick="downloadPDF(1)">Download Project PDF</button>
+  </div>
+
+  <!-- ASSIGNMENT 2 -->
+  <div class="card">
+    <h2>Assignment 2 – Research & Problem Solving</h2>
+
+    <div class="toggle">
+      <button id="dev2" class="active" onclick="setMode(2,'Developer')">Developer</button>
+      <button id="des2" onclick="setMode(2,'Designer')">Designer</button>
+    </div>
+
+    <input type="text" id="sid2" placeholder="Student ID" required>
+
+    <select id="dept2">
+      <option>Software Development & Engineering</option>
+      <option>Software Design & Innovation</option>
+    </select>
+
+    <select id="course2">
+      <option>Frontend Development</option>
+      <option>Backend Development</option>
+      <option>Full Stack Development</option>
+      <option>Logo Design</option>
+      <option>Visual Design</option>
+      <option>Graphic Design</option>
+    </select>
+
+    <button class="generate" onclick="generateProject(2)">Generate Research Task</button>
+
+    <pre class="result" id="result2"></pre>
+    <button class="download" id="download2" onclick="downloadPDF(2)">Download Project PDF</button>
+  </div>
+
+</div>
+
+<script>
+const buildProjects = [
+  "Build a responsive website solving a real community problem.",
+  "Develop a digital system that automates a manual process.",
+  "Create a user-friendly interface for an education platform.",
+  "Design a branding identity for a startup.",
+  "Build a project using AI-assisted development tools."
+];
+
+const researchProjects = [
+  "Research how AI improves software productivity.",
+  "Analyze the impact of UI/UX on user behavior.",
+  "Study automation challenges in Africa.",
+  "Research ethical use of AI in software engineering.",
+  "Analyze modern web technologies and their future."
+];
+
+function setMode(num, mode) {
+  document.getElementById(`dev${num}`).classList.remove("active");
+  document.getElementById(`des${num}`).classList.remove("active");
+
+  if(mode === "Developer") {
+    document.getElementById(`dev${num}`).classList.add("active");
+  } else {
+    document.getElementById(`des${num}`).classList.add("active");
+  }
+}
+
+function generateProject(num) {
+  const now = new Date();
+  const deadline = new Date(now.getTime() + 72 * 60 * 60 * 1000);
+
+  const format = d => d.toLocaleString();
+
+  const list = num === 1 ? buildProjects : researchProjects;
+  const project = list[Math.floor(Math.random() * list.length)];
+
+  const receipt = `
+==============================
+Africa Institution of Technology
+==============================
+
+Student ID: ${document.getElementById(`sid${num}`).value}
+Department: ${document.getElementById(`dept${num}`).value}
+Course: ${document.getElementById(`course${num}`).value}
+
+ASSIGNED TASK:
+${project}
+
+------------------------------
+Submission Date & Time:
+${format(now)}
+
+Deadline (72 Hours):
+${format(deadline)}
+
+------------------------------
+This project is officially assigned by
+Africa Institution of Technology
+under BlackLogic Technologies
+Hardware and Projects Pty Ltd.
+------------------------------
+`;
+
+  const result = document.getElementById(`result${num}`);
+  const download = document.getElementById(`download${num}`);
+
+  result.textContent = receipt;
+  result.style.display = "block";
+  download.style.display = "block";
+
+  result.dataset.content = receipt;
+}
+
+function downloadPDF(num) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  const content = document.getElementById(`result${num}`).dataset.content;
+  doc.setFont("courier");
+  doc.setFontSize(10);
+  doc.text(content, 10, 10);
+  doc.save(`AIT_Assignment_${num}.pdf`);
+}
+</script>
+
+</body>
+</html>

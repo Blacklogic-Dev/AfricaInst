@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Africa Institution of Technology</title>
+
+  <style>
+    :root {
+      --bg: #050508;
+      --pink: #ff4fd8;
+      --electric-blue: #00eaff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #0b0f2a, var(--bg));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Segoe UI", sans-serif;
+      color: var(--pink);
+    }
+
+    .container {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    /* LOGO */
+    .logo-wrapper {
+      width: 300px;
+      height: 300px;
+      margin: 0 auto 30px;
+      border-radius: 24px;
+      overflow: hidden;
+      animation: breathe 3s ease-in-out infinite;
+      box-shadow:
+        0 0 20px var(--electric-blue),
+        0 0 40px rgba(0, 234, 255, 0.6);
+    }
+
+    .logo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 24px;
+    }
+
+    @keyframes breathe {
+      0% {
+        box-shadow:
+          0 0 15px var(--electric-blue),
+          0 0 30px rgba(0, 234, 255, 0.5);
+      }
+      50% {
+        box-shadow:
+          0 0 30px var(--electric-blue),
+          0 0 60px rgba(0, 234, 255, 0.9);
+      }
+      100% {
+        box-shadow:
+          0 0 15px var(--electric-blue),
+          0 0 30px rgba(0, 234, 255, 0.5);
+      }
+    }
+
+    /* DESCRIPTION */
+    .description {
+      max-width: 520px;
+      margin: 0 auto 40px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--pink);
+      opacity: 0.95;
+    }
+
+    /* BUTTON */
+    .discover-btn {
+      display: inline-block;
+      padding: 14px 40px;
+      background: var(--pink);
+      color: #000;
+      font-weight: bold;
+      border-radius: 40px;
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(255, 79, 216, 0.6);
+    }
+
+    .discover-btn:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 30px rgba(255, 79, 216, 1),
+        0 0 60px rgba(255, 79, 216, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- LOGO -->
+    <div class="logo-wrapper">
+      <!-- Replace logo.png with your actual logo -->
+      <img src="africai.jpg" alt="Africa Institution of Technology Logo" />
+    </div>
+
+    <!-- DESCRIPTION -->
+    <p class="description">
+      Africa Institution of Technology is a next-generation learning space
+      where African minds are trained through real projects, AI-driven learning,
+      and innovation — not exams.
+    </p>
+
+    <!-- BUTTON -->
+    <a href="login.html" class="discover-btn">
+      DISCOVER
+    </a>
+
+  </div>
+
+</body>
+</html>

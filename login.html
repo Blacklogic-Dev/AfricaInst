@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa Institution of Technology – Login/Admission</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {
+    background: #0a0a0a;
+    color: #ff69b4;
+    font-family: 'Courier New', monospace;
+  }
+  .card {
+    background: rgba(20,20,20,0.95);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 0 20px #00ffff;
+  }
+  .toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .toggle button {
+    padding: 0.5rem 1.5rem;
+    margin: 0 0.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #222;
+    color: #ff69b4;
+    transition: all 0.3s;
+  }
+  .toggle button.active {
+    background: #ff69b4;
+    color: #0a0a0a;
+  }
+  .form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .form-group label {
+    margin-bottom: 0.3rem;
+  }
+  .form-group input, .form-group select {
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: none;
+    background: #222;
+    color: #ff69b4;
+    font-size: 1rem;
+    width: 100%;
+  }
+  button.submit, button.download {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    cursor: pointer;
+  }
+  button.submit {
+    background: #ff69b4;
+    color: #0a0a0a;
+  }
+  button.submit:disabled {
+    background: #444;
+    cursor: not-allowed;
+  }
+  button.download {
+    background: #00ffff;
+    color: #0a0a0a;
+  }
+  pre.receipt {
+    background: #fff;
+    color: #000;
+    padding: 1rem;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin-top: 1rem;
+    font-family: 'Courier New', monospace;
+  }
+</style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+<div class="card text-center">
+  <img src="africai.jpg" alt="Africa Logo" width="150" height="150" class="mx-auto mb-4 rounded-lg shadow-lg" />
+
+  <div class="toggle">
+    <button id="loginBtn" class="active">Login</button>
+    <button id="admissionBtn">Admission</button>
+  </div>
+
+  <!-- LOGIN FORM -->
+  <form id="loginForm">
+    <div class="form-group">
+      <label for="studentID">Student ID</label>
+      <input type="text" id="studentID" placeholder="Enter your Student ID" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter Password" required>
+    </div>
+    <button type="button" class="submit" id="loginRedirect">Login</button>
+  </form>
+
+  <!-- ADMISSION FORM -->
+  <form id="admissionForm" style="display:none;">
+    <div class="form-group">
+      <label for="fullName">Name & Surname</label>
+      <input type="text" id="fullName" placeholder="Enter Full Name" required>
+    </div>
+    <div class="form-group">
+      <label for="idNumber">ID Number</label>
+      <input type="text" id="idNumber" placeholder="Enter ID Number" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter Email" required>
+    </div>
+    <div class="form-group">
+      <label for="address">Physical Address</label>
+      <input type="text" id="address" placeholder="Enter Address" required>
+    </div>
+    <div class="form-group">
+      <label for="whatsapp">WhatsApp Number</label>
+      <input type="text" id="whatsapp" placeholder="Enter WhatsApp Number" required>
+    </div>
+    <div class="form-group">
+      <label for="department">Department</label>
+      <select id="department" required>
+        <option value="">Select Department</option>
+        <option value="Design">Design</option>
+        <option value="Development">Development</option>
+      </select>
+    </div>
+    <button type="button" id="downloadReceipt" class="download">Download Receipt</button>
+    <button type="button" id="submitForm" class="submit" disabled>Submit Application</button>
+  </form>
+
+  <pre class="receipt" id="receipt" style="display:none;"></pre>
+</div>
+
+<script>
+const loginBtn = document.getElementById('loginBtn');
+const admissionBtn = document.getElementById('admissionBtn');
+const loginForm = document.getElementById('loginForm');
+const admissionForm = document.getElementById('admissionForm');
+const receiptEl = document.getElementById('receipt');
+const downloadBtn = document.getElementById('downloadReceipt');
+const submitBtn = document.getElementById('submitForm');
+
+// Toggle Forms
+loginBtn.addEventListener('click', () => {
+  loginBtn.classList.add('active');
+  admissionBtn.classList.remove('active');
+  loginForm.style.display = 'block';
+  admissionForm.style.display = 'none';
+  receiptEl.style.display = 'none';
+});
+
+admissionBtn.addEventListener('click', () => {
+  loginBtn.classList.remove('active');
+  admissionBtn.classList.add('active');
+  loginForm.style.display = 'none';
+  admissionForm.style.display = 'block';
+  receiptEl.style.display = 'none';
+  submitBtn.disabled = true;
+});
+
+// Login redirect
+document.getElementById('loginRedirect').addEventListener('click', () => {
+  const studentID = document.getElementById('studentID').value;
+  const password = document.getElementById('password').value;
+  if(!studentID || !password){
+    alert("Please enter your Student ID and Password!");
+    return;
+  }
+  window.location.href = "dashboard.html";
+});
+
+// Generate Receipt & Enable Submit
+downloadBtn.addEventListener('click', () => {
+  const fullName = document.getElementById('fullName').value;
+  const idNumber = document.getElementById('idNumber').value;
+  const email = document.getElementById('email').value;
+  const address = document.getElementById('address').value;
+  const whatsapp = document.getElementById('whatsapp').value;
+  const department = document.getElementById('department').value;
+
+  if(!fullName || !idNumber || !email || !address || !whatsapp || !department){
+    alert("Please fill all fields!");
+    return;
+  }
+
+  const studentID = Math.floor(100000 + Math.random()*900000); // 6 digits
+  const password = idNumber.slice(0,6);
+
+  const receipt = `
+==============================
+AIT - Africa Inst Tech
+==============================
+Student ID: ${studentID}
+Password: ${password}
+
+Name & Surname: ${fullName}
+ID Number: ${idNumber}
+Department: ${department}
+Email: ${email}
+WhatsApp number: ${whatsapp}
+==============================
+  `;
+
+  receiptEl.textContent = receipt;
+  receiptEl.style.display = 'block';
+  submitBtn.disabled = false;
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.text(receipt, 10, 10);
+  doc.save('AIT_Admission_Receipt.pdf');
+});
+
+// Submit to WhatsApp & Redirect
+submitBtn.addEventListener('click', () => {
+  const message = encodeURIComponent(receiptEl.textContent);
+  window.open(`https://wa.me/27606614909?text=${message}`, '_blank');
+  alert("Receipt sent to WhatsApp!");
+  window.location.href = "dashboard.html";
+});
+</script>
+
+</body>
+</html>

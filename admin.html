@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIT Admin Panel</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  body {
+    background:#0a0a0a;
+    color:#ff69b4;
+    font-family:'Courier New', monospace;
+  }
+  .container {
+    max-width:500px;
+    margin:50px auto;
+    padding:20px;
+  }
+  .card {
+    background:#111;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 0 20px #00ffff;
+  }
+  .form-group {
+    margin-bottom:1rem;
+    display:flex;
+    flex-direction:column;
+  }
+  .form-group input, .form-group select {
+    padding:0.6rem;
+    border-radius:6px;
+    border:none;
+    background:#222;
+    color:#ff69b4;
+    font-size:1rem;
+  }
+  button {
+    width:100%;
+    padding:0.8rem;
+    margin-top:0.5rem;
+    border-radius:10px;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+  }
+  button.login {
+    background:#ff69b4;
+    color:#0a0a0a;
+  }
+  button.generate {
+    background:#00ffff;
+    color:#0a0a0a;
+  }
+  pre.receipt {
+    background:#fff;
+    color:#000;
+    padding:1rem;
+    border-radius:12px;
+    overflow-x:auto;
+    margin-top:1rem;
+    font-family:'Courier New', monospace;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- LOGIN CARD -->
+  <div class="card" id="loginCard">
+    <h2 class="text-center mb-4">Admin Login</h2>
+    <div class="form-group">
+      <label for="adminID">Unique ID</label>
+      <input type="text" id="adminID" placeholder=" ">
+    </div>
+    <div class="form-group">
+      <label for="adminPassword">Password</label>
+      <input type="password" id="adminPassword" placeholder="Enter Password">
+    </div>
+    <button class="login" id="loginBtn">Login</button>
+  </div>
+
+  <!-- RESULT FORM -->
+  <div class="card" id="resultCard" style="display:none;">
+    <h2 class="text-center mb-4">Student Result Entry</h2>
+    <div class="form-group">
+      <label for="studentName">Name & Surname</label>
+      <input type="text" id="studentName">
+    </div>
+    <div class="form-group">
+      <label for="studentID">Student ID</label>
+      <input type="text" id="studentID">
+    </div>
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input type="date" id="startDate">
+    </div>
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input type="date" id="endDate">
+    </div>
+    <div class="form-group">
+      <label for="assignment1">Assignment 1 Result</label>
+      <select id="assignment1">
+        <option value="">Select Result</option>
+        <option value="25">25% - Not successful</option>
+        <option value="50">50% - Moderate but not qualified</option>
+        <option value="75">75% - Elementary achievement</option>
+        <option value="100">100% - Outstanding achievement</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="assignment2">Assignment 2 Result</label>
+      <select id="assignment2">
+        <option value="">Select Result</option>
+        <option value="25">25% - Not successful</option>
+        <option value="50">50% - Moderate but not qualified</option>
+        <option value="75">75% - Elementary achievement</option>
+        <option value="100">100% - Outstanding achievement</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="whatsapp">WhatsApp Number</label>
+      <input type="text" id="whatsapp" placeholder="e.g. 0606614909">
+    </div>
+
+    <button class="generate" id="generateReceipt">Generate Receipt & Send</button>
+    <pre class="receipt" id="receipt" style="display:none;"></pre>
+  </div>
+
+</div>
+
+<script>
+const loginBtn = document.getElementById('loginBtn');
+const loginCard = document.getElementById('loginCard');
+const resultCard = document.getElementById('resultCard');
+
+loginBtn.addEventListener('click', () => {
+  const id = document.getElementById('adminID').value;
+  const password = document.getElementById('adminPassword').value;
+
+  if((id === "KX0011" || id === "KX1011") && password === "Blacklogic@24"){
+    alert("Login Successful!");
+    loginCard.style.display = "none";
+    resultCard.style.display = "block";
+  } else {
+    alert("Invalid ID or Password!");
+  }
+});
+
+// Bible Verse generator based on average result
+function getBibleVerse(avg){
+  if(avg >= 80) return "MATTHEW 6:33 – Seek first the kingdom of God and His righteousness...";
+  if(avg >= 50) return "PHILIPPIANS 4:13 – I can do all things through Christ who strengthens me...";
+  return "JEREMIAH 29:11 – For I know the plans I have for you, declares the Lord...";
+}
+
+document.getElementById('generateReceipt').addEventListener('click', () => {
+  const name = document.getElementById('studentName').value;
+  const studentID = document.getElementById('studentID').value;
+  const start = document.getElementById('startDate').value;
+  const end = document.getElementById('endDate').value;
+  const a1 = parseInt(document.getElementById('assignment1').value);
+  const a2 = parseInt(document.getElementById('assignment2').value);
+  const whatsapp = document.getElementById('whatsapp').value;
+
+  if(!name || !studentID || !start || !end || !a1 || !a2 || !whatsapp){
+    alert("Please fill all fields!");
+    return;
+  }
+
+  const avg = (a1 + a2)/2;
+  const verse = getBibleVerse(avg);
+  const letter = avg >= 50 ? "LETTER OF COMPLETION" : "LETTER OF ENCOURAGEMENT";
+
+  const assignmentMap = {
+    25: "Not successful",
+    50: "Moderate but not qualified",
+    75: "Elementary achievement",
+    100: "Outstanding achievement"
+  };
+
+  const receipt = `
+==============
+${letter}
+==============
+
+Bible Verse: ${verse}
+
+DETAILS
+--------------
+Name & Surname: ${name}
+Student ID: ${studentID}
+Start Date: ${start}
+End Date: ${end}
+Assignment 1: ${a1}% - ${assignmentMap[a1]}
+Assignment 2: ${a2}% - ${assignmentMap[a2]}
+Average: ${avg}%
+==============
+  `;
+
+  const receiptEl = document.getElementById('receipt');
+  receiptEl.textContent = receipt;
+  receiptEl.style.display = "block";
+
+  // Generate PDF
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.text(receipt, 10, 10);
+  doc.save(`${studentID}_Result.pdf`);
+
+  // Send to WhatsApp
+  const message = encodeURIComponent(receipt);
+  window.open(`https://wa.me/${whatsapp}?text=${message}`, '_blank');
+  alert("Receipt sent to WhatsApp!");
+});
+</script>
+
+</body>
+</html>
