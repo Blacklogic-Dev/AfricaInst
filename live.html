@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AIT Live Session</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0f1a;
+      color: #fff;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      background: linear-gradient(90deg, #000428, #004e92);
+    }
+
+    header h1 {
+      margin: 0;
+      color: #ff4fd8;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    /* Video */
+    .video-wrapper iframe {
+      width: 100%;
+      height: 400px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    /* Engagement */
+    .engagement {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      gap: 15px;
+    }
+
+    .like-btn {
+      background: #ff4fd8;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 30px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Comments */
+    .comments-box {
+      background: #11162a;
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .comments-feed {
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+
+    .comment {
+      margin-bottom: 8px;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .user {
+      background: #1f2a48;
+    }
+
+    .ai {
+      background: #2b1b3d;
+      color: #ff9cf0;
+    }
+
+    .comment-input {
+      display: flex;
+      gap: 10px;
+    }
+
+    .comment-input input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      background: #1f2a48;
+      color: #fff;
+    }
+
+    .send-btn {
+      background: #ff4fd8;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Africa Institution of Technology – LIVE</h1>
+  <p>Interactive AI-assisted learning session</p>
+</header>
+
+<div class="container">
+
+  <!-- Video -->
+  <div class="video-wrapper">
+    <iframe src="https://www.youtube.com/embed/live_stream?channel=CHANNEL_ID"></iframe>
+  </div>
+
+  <!-- Engagement -->
+  <div class="engagement">
+    <button class="like-btn" onclick="addLike()">
+      ❤️ Like <span id="likes">0</span>
+    </button>
+  </div>
+
+  <!-- Comments -->
+  <div class="comments-box">
+    <div class="comments-feed" id="comments"></div>
+
+    <div class="comment-input">
+      <input type="text" id="autoComment" readonly>
+      <button class="send-btn" onclick="sendComment()">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  let likes = 0;
+
+  const userComments = [
+    "This lesson is powerful 🔥",
+    "Can AI really help us learn faster?",
+    "This makes sense now!",
+    "Prompt engineering is deep 😮",
+    "AIT is next level 🚀"
+  ];
+
+  const aiReplies = [
+    "Great insight! AI accelerates learning by personalizing understanding.",
+    "Exactly! Prompt engineering sharpens how you think and ask.",
+    "You're catching on fast — keep going!",
+    "This is the foundation of modern AI interaction.",
+    "Well said. You're thinking like an engineer now.",
+    "AI adapts to your curiosity — use it wisely.",
+    "Strong observation! This skill scales globally.",
+    "You're on the right track, keep exploring.",
+    "Learning deeply beats memorizing.",
+    "AIT believes in practical intelligence."
+  ];
+
+  function addLike() {
+    likes++;
+    document.getElementById("likes").textContent = likes;
+  }
+
+  function autoFill() {
+    const random = userComments[Math.floor(Math.random() * userComments.length)];
+    document.getElementById("autoComment").value = random;
+  }
+
+  function sendComment() {
+    const commentBox = document.getElementById("comments");
+    const userText = document.getElementById("autoComment").value;
+
+    if (!userText) return;
+
+    commentBox.innerHTML += `<div class="comment user">${userText}</div>`;
+
+    setTimeout(() => {
+      const aiText = aiReplies[Math.floor(Math.random() * aiReplies.length)];
+      commentBox.innerHTML += `<div class="comment ai">🤖 AI: ${aiText}</div>`;
+      commentBox.scrollTop = commentBox.scrollHeight;
+    }, 600);
+
+    autoFill();
+  }
+
+  autoFill();
+</script>
+
+</body>
+</html>
