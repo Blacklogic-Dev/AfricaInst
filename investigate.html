@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Investigation Technologist – AIT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #ff69b4;
+      font-family: 'Courier New', monospace;
+    }
+    .card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 14px;
+      box-shadow: 0 0 15px rgba(255,105,180,0.2);
+    }
+    .btn {
+      font-weight: bold;
+    }
+    .progress-bar {
+      background: #222;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress {
+      background: #00ff00;
+      width: 0%;
+      height: 20px;
+      transition: width 0.5s;
+    }
+    iframe {
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body class="pb-20">
+
+  <!-- ================= BANNER ================= -->
+  <section class="w-full h-[300px] flex items-center justify-center bg-cover bg-center"
+    style="background-image:url('ai-investigation.jpg')">
+    <div class="bg-black/80 p-8 rounded-xl border border-pink-400 text-center">
+      <h1 class="text-4xl font-bold">AI Investigation Technologist</h1>
+      <p class="text-gray-300 mt-2">Africa Institution of Technology</p>
+      <p class="text-gray-400 mt-1">⏱ Duration: 2 Weeks – Learn AI investigation tools & techniques</p>
+    </div>
+  </section>
+
+  <!-- ================= PROGRESS ================= -->
+  <section class="max-w-4xl mx-auto mt-8 px-4">
+    <p class="mb-2">Course Progress:</p>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+  </section>
+
+  <!-- ================= INSTRUCTIONS ================= -->
+  <section class="max-w-4xl mx-auto mt-6 px-4">
+    <div class="card p-6 border border-pink-400 bg-black/80">
+      <h2 class="text-pink-400 font-bold text-xl mb-4">Instructions</h2>
+      <ol class="list-decimal list-inside text-gray-300 space-y-2">
+        <li>Watch each video completely.</li>
+        <li>Copy the prompt using the clipboard button below each module.</li>
+        <li>Use AI tools to explore investigation concepts further.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= MODULES ================= -->
+  <section class="max-w-4xl mx-auto mt-6 px-4 flex flex-col gap-6">
+
+<!-- Module 1 – Deep Research with ChatGPT -->
+<div class="card p-4">
+  <h2 class="font-bold text-lg mb-2">Module 1 – Deep Research with ChatGPT <span class="text-gray-400">(YouTube)</span></h2>
+  <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/ld3XMuXwLcE" allowfullscreen></iframe>
+  <p class="text-gray-300 mb-3">Learn the fundamentals of AI investigation & Deep research with ChatGPT.</p>
+  <div class="flex gap-3">
+    <button class="btn px-4 py-2 bg-orange-400 text-black rounded copy-btn" 
+            data-prompt="Learn the fundamentals of AI investigation and its applications in various industries.">
+      <i class="fas fa-clipboard"></i> Copy Prompt
+    </button>
+  </div>
+</div>
+
+<!-- Module 2 – AI Data Analysis Techniques -->
+<div class="card p-4">
+  <h2 class="font-bold text-lg mb-2">Module 2 – AI Data Analysis Techniques with ChatGPT <span class="text-gray-400">(YouTube)</span></h2>
+  <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/8qWtU51lxpM?si=qAKKazy7RxzlBP8U" allowfullscreen></iframe>
+  <p class="text-gray-300 mb-3">Understand AI data analysis methods to uncover patterns and insights efficiently.</p>
+  <div class="flex gap-3">
+    <button class="btn px-4 py-2 bg-orange-400 text-black rounded copy-btn" 
+            data-prompt="Understand AI data analysis methods to uncover patterns and insights efficiently.">
+      <i class="fas fa-clipboard"></i> Copy Prompt
+    </button>
+  </div>
+</div>
+
+    <!-- Module 3 – Investigative Tools & Software -->
+    <div class="card p-4">
+      <h2 class="font-bold text-lg mb-2">Module 3 – Investigative Tools & Software <span class="text-gray-400">(YouTube)</span></h2>
+      <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
+      <p class="text-gray-300 mb-3">Explore tools and AI software for investigation, tracking, and analysis tasks.</p>
+      <div class="flex gap-3">
+        <button class="btn px-4 py-2 bg-orange-400 text-black rounded copy-btn" 
+                data-prompt="Explore tools and AI software for investigation, tracking, and analysis tasks.">
+          <i class="fas fa-clipboard"></i> Copy Prompt
+        </button>
+      </div>
+    </div>
+
+    <!-- Module 4 – AI Investigation Case Study -->
+    <div class="card p-4">
+      <h2 class="font-bold text-lg mb-2">Module 4 – AI Investigation Case Study <span class="text-gray-400">(YouTube)</span></h2>
+      <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/VIDEO_ID_4" allowfullscreen></iframe>
+      <p class="text-gray-300 mb-3">Apply AI investigation techniques in a live case study scenario.</p>
+      <div class="flex gap-3">
+        <button class="btn px-4 py-2 bg-orange-400 text-black rounded copy-btn" 
+                data-prompt="Apply AI investigation techniques in a live case study scenario.">
+          <i class="fas fa-clipboard"></i> Copy Prompt
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    // Copy prompt logic
+    document.querySelectorAll(".copy-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const prompt = btn.getAttribute("data-prompt");
+        navigator.clipboard.writeText(prompt).then(() => {
+          btn.textContent = "Copied ✅";
+          setTimeout(() => btn.innerHTML = '<i class="fas fa-clipboard"></i> Copy Prompt', 2000);
+          // Update progress
+          let progressBar = document.getElementById("progress");
+          let currentWidth = parseInt(progressBar.style.width) || 0;
+          let newWidth = Math.min(currentWidth + 25, 100); // 4 modules → 25% each
+          progressBar.style.width = newWidth + "%";
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
