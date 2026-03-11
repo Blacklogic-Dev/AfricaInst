@@ -153,207 +153,291 @@ document.getElementById("generatePassword").addEventListener("click", () => {
 <!-- ADMISSION FORM -->
 <form id="admissionForm" style="display:none">
 
-    <div class="form-group">
-        <label>Name & Surname</label>
-        <input type="text" id="fullName" required>
-    </div>
+<div class="form-group">
+<label>Name & Surname</label>
+<input type="text" id="fullName" required>
+</div>
 
-    <div class="form-group">
-        <label>ID Number</label>
-        <input type="text" id="idNumber" required>
-    </div>
+<div class="form-group">
+<label>ID Number</label>
+<input type="text" id="idNumber" required>
+</div>
 
-    <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="email" required>
-    </div>
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="email" required>
+</div>
 
-    <div class="form-group">
-        <label>Physical Address</label>
-        <input type="text" id="address" required>
-    </div>
+<div class="form-group">
+<label>Physical Address</label>
+<input type="text" id="address" required>
+</div>
 
-    <div class="form-group">
-        <label>WhatsApp Number</label>
-        <input type="text" id="whatsapp" required>
-    </div>
+<div class="form-group">
+<label>WhatsApp Number</label>
+<input type="text" id="whatsapp" required>
+</div>
 
-    <!-- DEPARTMENT -->
-    <div class="form-group">
-        <label>Department</label>
-        <select id="department">
-            <option value="">Select Department</option>
-            <option value="Software Development">Software Development & Engineering</option>
-            <option value="Software Design">Software Design & Innovation</option>
-            <option value="Construction">Construction Technology</option>
-            <option value="AI Security">AI Investigation & Security</option>
-        </select>
-    </div>
+<!-- DEPARTMENT -->
+<div class="form-group">
+<label>Department</label>
+<select id="department">
+<option value="">Select Department</option>
+<option value="DEP-SD">Software Development & Engineering</option>
+<option value="DEP-DES">Software Design & Innovation</option>
+<option value="DEP-CON">Construction Technology</option>
+<option value="DEP-AI">AI Investigation & Security</option>
+</select>
+</div>
 
-    <!-- COURSE -->
-    <div class="form-group" id="courseGroup" style="display:none">
-        <label>Course</label>
-        <select id="course"></select>
-    </div>
+<!-- COURSE -->
+<div class="form-group" id="courseGroup" style="display:none">
+<label>Course</label>
+<select id="course"></select>
+</div>
 
-    <!-- Upload for Student Card -->
-    <div class="form-group">
-        <label>Upload Student Photo</label>
-        <input type="file" id="studentPhoto" accept="image/*">
-    </div>
+<!-- PHOTO -->
+<div class="form-group">
+<label>Upload Student Photo (Front View)</label>
+<input type="file" id="studentPhoto" accept="image/*">
+</div>
 
-    <button type="button" id="downloadReceipt" class="download">
-        Download Receipt
-    </button>
-    <button type="button" id="submitForm" class="submit" disabled>
-        Submit Application
-    </button>
+<button type="button" id="registerStudent" class="submit">
+Register & Send Application
+</button>
+
+<button type="button" id="proceedCard" class="download" style="display:none">
+Proceed to Student Card
+</button>
 
 </form>
 
-<!-- Student Card Canvas -->
-<canvas id="studentCardCanvas" width="400" height="250" style="display:none"></canvas>
-
 <!-- Receipt -->
-<pre id="receipt" class="receipt" style="display:none"></pre>
+<pre id="receipt" class="receipt" style="display:none;
+font-family:Courier New,monospace;
+white-space:pre-wrap;
+max-width:100%;
+overflow:hidden;"></pre>
 
-</div>
+<!-- STUDENT CARD -->
+<canvas id="studentCardCanvas" width="794" height="1123" style="display:none"></canvas>
+
+<button id="downloadCard" class="download" style="display:none">
+Download Student Card
+</button>
+
 
 <script>
-// Toggle login/admission forms
-const loginBtn=document.getElementById("loginBtn");
-const admissionBtn=document.getElementById("admissionBtn");
-const loginForm=document.getElementById("loginForm");
-const admissionForm=document.getElementById("admissionForm");
 
-loginBtn.addEventListener("click",()=>{
+// Toggle login/admission forms
+const loginBtn = document.getElementById("loginBtn");
+const admissionBtn = document.getElementById("admissionBtn");
+const loginForm = document.getElementById("loginForm");
+const admissionForm = document.getElementById("admissionForm");
+
+loginBtn.onclick = () => {
     loginForm.style.display="block";
     admissionForm.style.display="none";
     loginBtn.classList.add("active");
     admissionBtn.classList.remove("active");
-});
+};
 
-admissionBtn.addEventListener("click",()=>{
+admissionBtn.onclick = () => {
     loginForm.style.display="none";
     admissionForm.style.display="block";
     admissionBtn.classList.add("active");
     loginBtn.classList.remove("active");
-});
+};
 
-// Courses per department
-const department=document.getElementById("department");
-const course=document.getElementById("course");
-const courseGroup=document.getElementById("courseGroup");
 
-const courses={
-    "Software Development":["Frontend Development","Backend Development","Full Stack Development"],
-    "Software Design":["Logo Design","Visual Design","Graphic Design"],
-    "Construction":["Project Management Technology","Construction Technology (AutoCAD & Civil Engineering)"],
-    "AI Security":["Office Security Technology","Admin Technologist","AI Investigation Technologist"]
+// Department + Courses
+const department = document.getElementById("department");
+const course = document.getElementById("course");
+const courseGroup = document.getElementById("courseGroup");
+
+const courses = {
+"DEP-SD":[
+{code:"SD101",name:"Frontend Development"},
+{code:"SD201",name:"Backend Development"},
+{code:"SD301",name:"Full Stack Development"}
+],
+"DEP-DES":[
+{code:"DS101",name:"Logo Design"},
+{code:"DS102",name:"Visual Design"}
+],
+"DEP-CON":[
+{code:"CT101",name:"Construction Technology"},
+{code:"CT201",name:"AutoCAD Civil"}
+],
+"DEP-AI":[
+{code:"AI101",name:"Office Security Technology"},
+{code:"AI201",name:"Admin Technologist"},
+{code:"AI301",name:"AI Investigation Technologist"}
+]
 };
 
 department.addEventListener("change",function(){
-    const selected=this.value;
-    course.innerHTML="";
-    if(selected===""){
-        courseGroup.style.display="none";
-        return;
-    }
-    courseGroup.style.display="block";
-    courses[selected].forEach(c=>{
-        const option=document.createElement("option");
-        option.value=c;
-        option.textContent=c;
-        course.appendChild(option);
-    });
+
+course.innerHTML="";
+
+if(!this.value){
+courseGroup.style.display="none";
+return;
+}
+
+courseGroup.style.display="block";
+
+courses[this.value].forEach(c=>{
+const option=document.createElement("option");
+option.value=c.code+" | "+c.name;
+option.textContent=c.code+" - "+c.name;
+course.appendChild(option);
 });
+
+});
+
+
+// Register Student
+let studentNumber="";
+
+document.getElementById("registerStudent").onclick=function(){
+
+const name=document.getElementById("fullName").value;
+const id=document.getElementById("idNumber").value;
+const email=document.getElementById("email").value;
+const address=document.getElementById("address").value;
+const whatsapp=document.getElementById("whatsapp").value;
+const dep=department.value;
+const cou=course.value;
+
+if(!name||!id||!email||!address||!whatsapp||!dep||!cou){
+alert("Please fill all fields");
+return;
+}
+
+studentNumber="AIT-"+Math.floor(100000+Math.random()*900000);
+
+const receiptText=`
+
+==============================
+AFRICA INSTITUTION OF TECHNOLOGY
+==============================
+
+ADMISSION LETTER
+
+Dear ${name}
+
+You have been admitted to:
+
+Course: ${cou}
+
+Department Code: ${dep}
+
+Student Number: ${studentNumber}
+
+Date: ${new Date().toLocaleString()}
+
+==============================
+
+`;
+
+const receipt=document.getElementById("receipt");
+receipt.textContent=receiptText;
+receipt.style.display="block";
+
+// send to WhatsApp
+const message=encodeURIComponent(receiptText+
+"\nEmail: "+email+
+"\nAddress: "+address+
+"\nWhatsApp: "+whatsapp);
+
+window.open(`https://wa.me/27606614909?text=${message}`,"_blank");
+
+document.getElementById("proceedCard").style.display="block";
+
+};
+
+
+// Generate Student Card
+document.getElementById("proceedCard").onclick=function(){
+
+const canvas=document.getElementById("studentCardCanvas");
+const ctx=canvas.getContext("2d");
+
+const name=document.getElementById("fullName").value;
+const dep=department.value;
+const cou=course.value;
+
+canvas.style.display="block";
+
+ctx.fillStyle="white";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="black";
+
+ctx.font="28px Courier New";
+ctx.fillText("Africa Institution of Technology",180,100);
+
+ctx.font="22px Courier New";
+ctx.fillText("Student: "+name,100,250);
+ctx.fillText("Student Number: "+studentNumber,100,300);
+ctx.fillText("Department: "+dep,100,350);
+ctx.fillText("Course: "+cou,100,400);
+
+// simple barcode
+const barcode="|||||"+studentNumber+"|||||";
+ctx.font="40px Courier New";
+ctx.fillText(barcode,100,500);
+
+
+// student photo
+const photo=document.getElementById("studentPhoto").files[0];
+
+if(photo){
+
+const img=new Image();
+
+img.onload=function(){
+ctx.drawImage(img,550,250,180,200);
+}
+
+img.src=URL.createObjectURL(photo);
+
+}
+
+document.getElementById("downloadCard").style.display="block";
+
+};
+
+
+// Download Card
+document.getElementById("downloadCard").onclick=function(){
+
+const canvas=document.getElementById("studentCardCanvas");
+
+const link=document.createElement("a");
+link.download="AIT_StudentCard.png";
+link.href=canvas.toDataURL();
+link.click();
+
+};
+
 
 // Login redirect
 document.getElementById("loginRedirect").onclick=function(){
-    const id=document.getElementById("studentID").value;
-    const pw=document.getElementById("password").value;
-    if(!id||!pw){ alert("Enter ID and Password"); return;}
-    window.location.href="dashboard.html";
+
+const id=document.getElementById("studentID").value;
+const pw=document.getElementById("password").value;
+
+if(!id||!pw){
+alert("Enter Student ID and Password");
+return;
+}
+
+window.location.href="dashboard.html";
+
 };
 
-// Generate Receipt & enable submit
-document.getElementById("downloadReceipt").onclick=function(){
-    const name=document.getElementById("fullName").value;
-    const id=document.getElementById("idNumber").value;
-    const email=document.getElementById("email").value;
-    const address=document.getElementById("address").value;
-    const whatsapp=document.getElementById("whatsapp").value;
-    const dep=department.value;
-    const cou=course.value;
-
-    if(!name||!id||!email||!address||!whatsapp||!dep||!cou){
-        alert("Fill all fields");
-        return;
-    }
-
-    const studentID="AIT-"+Math.floor(100000+Math.random()*900000);
-    const password=id.slice(0,6);
-
-    const receiptText=`
-==============================
-Africa Institution of Technology
-==============================
-
-Student ID: ${studentID}
-Password: ${password}
-
-Name: ${name}
-Department: ${dep}
-Course: ${cou}
-
-Email: ${email}
-WhatsApp: ${whatsapp}
-
-==============================
-`;
-
-    const receipt=document.getElementById("receipt");
-    receipt.textContent=receiptText;
-    receipt.style.display="block";
-    document.getElementById("submitForm").disabled=false;
-
-    const {jsPDF}=window.jspdf;
-    const doc=new jsPDF();
-    doc.text(receiptText,10,10);
-    doc.save("AIT_Admission_Receipt.pdf");
-
-    // Generate student card if photo uploaded
-    const photoInput=document.getElementById("studentPhoto");
-    const canvas=document.getElementById("studentCardCanvas");
-    if(photoInput.files.length>0){
-        const ctx=canvas.getContext("2d");
-        const img=new Image();
-        img.onload=function(){
-            ctx.fillStyle="#0a0a0a";
-            ctx.fillRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle="#00ffff";
-            ctx.font="16px Courier New";
-            ctx.fillText("Africa Institution of Technology",50,30);
-            ctx.font="14px Courier New";
-            ctx.fillText(`Student: ${name}`,20,60);
-            ctx.fillText(`ID: ${studentID}`,20,85);
-            ctx.fillText(`Department: ${dep}`,20,110);
-            ctx.fillText(`Course: ${cou}`,20,135);
-            // Draw photo
-            ctx.drawImage(img,300,50,80,100);
-            canvas.style.display="block";
-        }
-        img.src=URL.createObjectURL(photoInput.files[0]);
-    }
-};
-
-// Submit to WhatsApp
-document.getElementById("submitForm").onclick=function(){
-    const message=encodeURIComponent(document.getElementById("receipt").textContent);
-    window.open(`https://wa.me/27606614909?text=${message}`,"_blank");
-    alert("Application Sent!");
-    window.location.href="dashboard.html";
-};
 </script>
 
 </body>
