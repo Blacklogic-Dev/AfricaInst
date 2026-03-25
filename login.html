@@ -9,93 +9,88 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-body{
-    background:#0a0a0a;
-    color:#ff69b4;
-    font-family:'Courier New',monospace;
+body {
+    background: #0a0a0a;
+    color: #ff69b4;
+    font-family: 'Courier New', monospace;
 }
 
-.card{
-    background:rgba(20,20,20,0.95);
-    border-radius:16px;
-    padding:2rem;
-    max-width:520px;
-    width:100%;
-    box-shadow:0 0 20px #00ffff;
+.card {
+    background: rgba(20,20,20,0.95);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 0 20px #00ffff;
 }
 
-.toggle{
-    display:flex;
-    justify-content:center;
-    margin-bottom:1rem;
+.toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 
-.toggle button{
-    padding:0.5rem 1.5rem;
-    margin:0 0.5rem;
-    border:none;
-    border-radius:8px;
-    font-weight:bold;
-    cursor:pointer;
-    background:#222;
-    color:#ff69b4;
+.toggle button {
+    padding: 0.5rem 1.5rem;
+    margin: 0 0.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #222;
+    color: #ff69b4;
 }
 
-.toggle button.active{
-    background:#ff69b4;
-    color:#000;
+.toggle button.active {
+    background: #ff69b4;
+    color: #000;
 }
 
-.form-group{
-    margin-bottom:1rem;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .form-group input,
-.form-group select{
-    padding:0.6rem;
-    border-radius:6px;
-    border:none;
-    background:#222;
-    color:#ff69b4;
-    width:100%;
+.form-group select {
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: none;
+    background: #222;
+    color: #ff69b4;
+    width: 100%;
 }
 
-button.submit{
-    background:#ff69b4;
-    color:#000;
-    padding:0.8rem;
-    border-radius:10px;
-    font-weight:bold;
-    width:100%;
-    margin-top:5px;
+button.submit {
+    background: #ff69b4;
+    color: #000;
+    padding: 0.8rem;
+    border-radius: 10px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 5px;
 }
 
-button.download{
-    background:#00ffff;
-    color:#000;
-    padding:0.8rem;
-    border-radius:10px;
-    font-weight:bold;
-    width:100%;
-    margin-top:5px;
+button.download {
+    background: #00ffff;
+    color: #000;
+    padding: 0.8rem;
+    border-radius: 10px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 5px;
 }
 
-pre.receipt{
-    background:white;
-    color:black;
-    padding:1rem;
-    border-radius:12px;
-    margin-top:1rem;
-}
-
-#studentCardCanvas{
-    display:block;
-    margin:1rem auto;
-    border:2px solid #00ffff;
-    border-radius:12px;
+pre.receipt {
+    background: white;
+    color: black;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+    white-space: pre-wrap;
+    font-family: 'Courier New', monospace;
 }
 </style>
 </head>
@@ -108,47 +103,28 @@ pre.receipt{
 
 <!-- Toggle -->
 <div class="toggle">
-    <button id="loginBtn" class="active">Login</button>
-    <button id="admissionBtn">Admission</button>
+<button id="loginBtn" class="active">Login</button>
+<button id="admissionBtn">Admission</button>
 </div>
 
 <!-- LOGIN FORM -->
 <form id="loginForm">
-  <div class="form-group">
-    <label>Student ID</label>
-    <input type="text" id="studentID" required>
-  </div>
+<div class="form-group">
+<label>Student ID</label>
+<input type="text" id="studentID" required>
+</div>
 
-  <div class="form-group" style="position:relative;">
-    <label>Password</label>
-    <input type="text" id="password" placeholder="Click generate" readonly required>
-    <!-- Generate button inside form group -->
-    <button type="button" id="generatePassword" 
-            style="position:absolute; right:5px; top:28px; padding:0.3rem 0.6rem; border:none; border-radius:5px; background:#ff69b4; color:#000; cursor:pointer;">
-      🔒 Generate
-    </button>
-  </div>
+<div class="form-group" style="position:relative;">
+<label>Password</label>
+<input type="text" id="password" placeholder="Click generate" readonly required>
+<button type="button" id="generatePassword"
+style="position:absolute; right:5px; top:28px; padding:0.3rem 0.6rem; border:none; border-radius:5px; background:#ff69b4; color:#000; cursor:pointer;">
+🔒 Generate
+</button>
+</div>
 
-  <button type="button" class="submit" id="loginRedirect">Login</button>
+<button type="button" class="submit" id="loginRedirect">Login</button>
 </form>
-
-<script>
-// Password generator function
-function generatePassword(length = 8) {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-    let password = "";
-    for (let i = 0; i < length; i++) {
-        password += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return password;
-}
-
-// Fill password field on button click
-document.getElementById("generatePassword").addEventListener("click", () => {
-    const passwordField = document.getElementById("password");
-    passwordField.value = generatePassword(10); // 10-character password
-});
-</script>
 
 <!-- ADMISSION FORM -->
 <form id="admissionForm" style="display:none">
@@ -178,266 +154,156 @@ document.getElementById("generatePassword").addEventListener("click", () => {
 <input type="text" id="whatsapp" required>
 </div>
 
-<!-- DEPARTMENT -->
 <div class="form-group">
 <label>Department</label>
-<select id="department">
-<option value="">Select Department</option>
-<option value="DEP-SD">Software Development & Engineering</option>
-<option value="DEP-DES">Software Design & Innovation</option>
-<option value="DEP-CON">Construction Technology</option>
-<option value="DEP-AI">AI Investigation & Security</option>
+<select id="departmentSelect">
+  <option value="">Select Department</option>
+  <option value="DEP-SD">Software Development & Engineering</option>
+  <option value="DEP-DES">Software Design & Innovation</option>
+  <option value="DEP-CON">Construction Technology</option>
+  <option value="DEP-AI">AI Investigation & Security</option>
+  <option value="DEP-ABM">Administration & Business Management</option>
 </select>
 </div>
 
-<!-- COURSE -->
 <div class="form-group" id="courseGroup" style="display:none">
 <label>Course</label>
-<select id="course"></select>
+<select id="courseSelect"></select>
 </div>
 
-<!-- PHOTO -->
-<div class="form-group">
-<label>Upload Student Photo (Front View)</label>
-<input type="file" id="studentPhoto" accept="image/*">
-</div>
-
-<button type="button" id="registerStudent" class="submit">
-Register & Send Application
-</button>
-
-<button type="button" id="proceedCard" class="download" style="display:none">
-Proceed to Student Card
-</button>
-
+<button type="button" class="submit" id="registerStudent">Register & Send Application</button>
 </form>
 
-<!-- Receipt -->
-<pre id="receipt" class="receipt" style="display:none;
-font-family:Courier New,monospace;
-white-space:pre-wrap;
-max-width:100%;
-overflow:hidden;"></pre>
-
-<!-- STUDENT CARD -->
-<canvas id="studentCardCanvas" width="794" height="1123" style="display:none"></canvas>
-
-<button id="downloadCard" class="download" style="display:none">
-Download Student Card
-</button>
-
+<pre id="receipt" class="receipt" style="display:none;"></pre>
+<button id="downloadPDF" class="download" style="display:none">📄 Download Admission Letter (PDF)</button>
 
 <script>
+// PASSWORD GENERATOR
+function generatePassword(length = 10) {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let password = "";
+  for (let i = 0; i < length; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return password;
+}
 
-// Toggle login/admission forms
+document.getElementById("generatePassword").onclick = function(){
+  document.getElementById("password").value = generatePassword();
+};
+
+// TOGGLE FORMS
 const loginBtn = document.getElementById("loginBtn");
 const admissionBtn = document.getElementById("admissionBtn");
 const loginForm = document.getElementById("loginForm");
 const admissionForm = document.getElementById("admissionForm");
 
 loginBtn.onclick = () => {
-    loginForm.style.display="block";
-    admissionForm.style.display="none";
-    loginBtn.classList.add("active");
-    admissionBtn.classList.remove("active");
+  loginForm.style.display = "block";
+  admissionForm.style.display = "none";
+  loginBtn.classList.add("active");
+  admissionBtn.classList.remove("active");
 };
 
 admissionBtn.onclick = () => {
-    loginForm.style.display="none";
-    admissionForm.style.display="block";
-    admissionBtn.classList.add("active");
-    loginBtn.classList.remove("active");
+  loginForm.style.display = "none";
+  admissionForm.style.display = "block";
+  admissionBtn.classList.add("active");
+  loginBtn.classList.remove("active");
 };
 
-
-// Department + Courses
-const department = document.getElementById("department");
-const course = document.getElementById("course");
-const courseGroup = document.getElementById("courseGroup");
+// COURSES
+const departmentSelect = document.getElementById("departmentSelect");
+const courseSelect = document.getElementById("courseSelect");
 
 const courses = {
-"DEP-SD":[
-{code:"SD101",name:"Frontend Development"},
-{code:"SD201",name:"Backend Development"},
-{code:"SD301",name:"Full Stack Development"}
-],
-"DEP-DES":[
-{code:"DS101",name:"Logo Design"},
-{code:"DS102",name:"Visual Design"}
-],
-"DEP-CON":[
-{code:"CT101",name:"Construction Technology"},
-{code:"CT201",name:"AutoCAD Civil"}
-],
-"DEP-AI":[
-{code:"AI101",name:"Office Security Technology"},
-{code:"AI201",name:"Admin Technologist"},
-{code:"AI301",name:"AI Investigation Technologist"}
-]
+  "DEP-SD": ["Frontend Development","Backend Development","Full Stack Development"],
+  "DEP-DES": ["Logo Design","Visual Design"],
+  "DEP-CON": ["Construction Technology","AutoCAD Civil"],
+  "DEP-AI": ["Office Security Technology","AI Investigation Technologist"],
+  "DEP-ABM": ["Administration Technology","Business Management",]
 };
 
-department.addEventListener("change",function(){
-
-course.innerHTML="";
-
-if(!this.value){
-courseGroup.style.display="none";
-return;
-}
-
-courseGroup.style.display="block";
-
-courses[this.value].forEach(c=>{
-const option=document.createElement("option");
-option.value=c.code+" | "+c.name;
-option.textContent=c.code+" - "+c.name;
-course.appendChild(option);
+departmentSelect.addEventListener("change", function(){
+  courseSelect.innerHTML = "";
+  if(!this.value){
+    courseGroup.style.display = "none";
+    return;
+  }
+  courseGroup.style.display = "block";
+  courses[this.value].forEach(c => {
+    const option = document.createElement("option");
+    option.value = c;
+    option.textContent = c;
+    courseSelect.appendChild(option);
+  });
 });
 
-});
+// REGISTER STUDENT
+document.getElementById("registerStudent").onclick = function(){
+  const name = document.getElementById("fullName").value;
+  const id = document.getElementById("idNumber").value;
+  const email = document.getElementById("email").value;
+  const address = document.getElementById("address").value;
+  const whatsapp = document.getElementById("whatsapp").value;
+  const dep = departmentSelect.value;
+  const cou = courseSelect.value;
 
+  if(!name || !id || !email || !address || !whatsapp || !dep || !cou){
+    alert("Please fill all fields");
+    return;
+  }
 
-// Register Student
-let studentNumber="";
+  const studentNumber = "AIT-"+Math.floor(100000 + Math.random()*900000);
 
-document.getElementById("registerStudent").onclick=function(){
-
-const name=document.getElementById("fullName").value;
-const id=document.getElementById("idNumber").value;
-const email=document.getElementById("email").value;
-const address=document.getElementById("address").value;
-const whatsapp=document.getElementById("whatsapp").value;
-const dep=department.value;
-const cou=course.value;
-
-if(!name||!id||!email||!address||!whatsapp||!dep||!cou){
-alert("Please fill all fields");
-return;
-}
-
-studentNumber="AIT-"+Math.floor(100000+Math.random()*900000);
-
-const receiptText=`
-
+  const receiptText = `
 ==============================
 AFRICA INSTITUTION OF TECHNOLOGY
 ==============================
 
 ADMISSION LETTER
 
-Dear ${name}
+Dear ${name},
 
 You have been admitted to:
 
+Department: ${dep}
 Course: ${cou}
-
-Department Code: ${dep}
 
 Student Number: ${studentNumber}
 
 Date: ${new Date().toLocaleString()}
 
 ==============================
-
 `;
 
-const receipt=document.getElementById("receipt");
-receipt.textContent=receiptText;
-receipt.style.display="block";
+  const receipt = document.getElementById("receipt");
+  receipt.textContent = receiptText;
+  receipt.style.display = "block";
+  document.getElementById("downloadPDF").style.display = "block";
 
-// send to WhatsApp
-const message=encodeURIComponent(receiptText+
-"\nEmail: "+email+
-"\nAddress: "+address+
-"\nWhatsApp: "+whatsapp);
-
-window.open(`https://wa.me/27606614909?text=${message}`,"_blank");
-
-document.getElementById("proceedCard").style.display="block";
-
+  // Send to WhatsApp (optional)
+  const message = encodeURIComponent(receiptText + "\nEmail: "+email+"\nAddress: "+address+"\nWhatsApp: "+whatsapp);
+  window.open(`https://wa.me/27606614909?text=${message}`,"_blank");
 };
 
+// DOWNLOAD PDF
+document.getElementById("downloadPDF").onclick = function(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-// Generate Student Card
-document.getElementById("proceedCard").onclick=function(){
+  const logo = new Image();
+  logo.src = "africai.jpg";
 
-const canvas=document.getElementById("studentCardCanvas");
-const ctx=canvas.getContext("2d");
-
-const name=document.getElementById("fullName").value;
-const dep=department.value;
-const cou=course.value;
-
-canvas.style.display="block";
-
-ctx.fillStyle="white";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-
-ctx.fillStyle="black";
-
-ctx.font="28px Courier New";
-ctx.fillText("Africa Institution of Technology",180,100);
-
-ctx.font="22px Courier New";
-ctx.fillText("Student: "+name,100,250);
-ctx.fillText("Student Number: "+studentNumber,100,300);
-ctx.fillText("Department: "+dep,100,350);
-ctx.fillText("Course: "+cou,100,400);
-
-// simple barcode
-const barcode="|||||"+studentNumber+"|||||";
-ctx.font="40px Courier New";
-ctx.fillText(barcode,100,500);
-
-
-// student photo
-const photo=document.getElementById("studentPhoto").files[0];
-
-if(photo){
-
-const img=new Image();
-
-img.onload=function(){
-ctx.drawImage(img,550,250,180,200);
-}
-
-img.src=URL.createObjectURL(photo);
-
-}
-
-document.getElementById("downloadCard").style.display="block";
-
+  logo.onload = function(){
+    doc.addImage(logo,"JPEG",80,10,50,30);
+    doc.setFont("Courier","Normal");
+    doc.setFontSize(12);
+    const text = document.getElementById("receipt").textContent;
+    doc.text(text,20,60);
+    doc.save("AIT_Admission_Letter.pdf");
+  };
 };
-
-
-// Download Card
-document.getElementById("downloadCard").onclick=function(){
-
-const canvas=document.getElementById("studentCardCanvas");
-
-const link=document.createElement("a");
-link.download="AIT_StudentCard.png";
-link.href=canvas.toDataURL();
-link.click();
-
-};
-
-
-// Login redirect
-document.getElementById("loginRedirect").onclick=function(){
-
-const id=document.getElementById("studentID").value;
-const pw=document.getElementById("password").value;
-
-if(!id||!pw){
-alert("Enter Student ID and Password");
-return;
-}
-
-window.location.href="dashboard.html";
-
-};
-
 </script>
 
 </body>

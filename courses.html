@@ -1,47 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AIT | Courses</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIT | Courses</title>
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <style>
-    body {
-      background: #000;
-      color: #ff69b4;
-      font-family: "Courier New", monospace;
-    }
-    .card {
-      background: #0b0b0b;
-      border: 1px solid #222;
-      border-radius: 14px;
-      box-shadow: 0 0 16px rgba(255,105,180,0.15);
-    }
-    .toggle-bg {
-      background: #111;
-      border: 1px solid #ff69b4;
-    }
-    .toggle-dot {
-      transition: all 0.3s ease;
-    }
-    .department-btn {
-      cursor: pointer;
-      padding: 0.5rem 1rem;
-      border-radius: 9999px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    .department-btn.active {
-      color: black;
-    }
-  </style>
+<style>
+  body {
+    background: #000;
+    color: #ff69b4;
+    font-family: "Courier New", monospace;
+  }
+  .card {
+    background: #0b0b0b;
+    border: 1px solid #222;
+    border-radius: 14px;
+    box-shadow: 0 0 16px rgba(255,105,180,0.15);
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .department-btn {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  .department-btn.active {
+    color: black;
+    background-color: currentColor;
+  }
+</style>
 </head>
 
 <body>
@@ -49,12 +44,9 @@
 <!-- ================= SLIDING BANNER ================= -->
 <section class="w-full h-[300px] relative overflow-hidden">
   <div id="slides" class="w-full h-full flex transition-transform duration-700">
-    <div class="w-full h-full flex-shrink-0 bg-cover bg-center"
-      style="background-image:url('coding.jpg')"></div>
-    <div class="w-full h-full flex-shrink-0 bg-cover bg-center"
-      style="background-image:url('designer.jpg')"></div>
-    <div class="w-full h-full flex-shrink-0 bg-cover bg-center"
-      style="background-image:url('stack.png')"></div>
+    <div class="w-full h-full flex-shrink-0 bg-cover bg-center" style="background-image:url('coding.jpg')"></div>
+    <div class="w-full h-full flex-shrink-0 bg-cover bg-center" style="background-image:url('designer.jpg')"></div>
+    <div class="w-full h-full flex-shrink-0 bg-cover bg-center" style="background-image:url('stack.png')"></div>
   </div>
 
   <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/50">
@@ -77,40 +69,44 @@ function showNextSlide() {
 setInterval(showNextSlide, 4000);
 </script>
 
-<!-- ================= DEPARTMENT TOGGLE ================= -->
+<!-- ================= SEARCH & FILTER ================= -->
 <section class="flex justify-center mt-10 gap-4 flex-wrap">
-  <div class="department-btn bg-pink-400 text-black active" onclick="showDepartment('developer')">Developer</div>
-  <div class="department-btn bg-pink-400 text-pink-400" onclick="showDepartment('designer')">Designer</div>
-  <div class="department-btn bg-orange-600 text-orange-400" onclick="showDepartment('construction')">Construction</div>
-  <div class="department-btn bg-green-600 text-green-400" onclick="showDepartment('aiSecurity')">AI Security</div>
-</section>
+  <!-- Search Input -->
+  <input type="text" id="courseSearch" placeholder="Search courses..."
+         class="p-2 rounded border border-gray-500 text-black w-64"
+         onkeyup="filterCourses()" />
 
+  <!-- Department Filter -->
+  <select id="departmentFilter" class="p-2 rounded border border-gray-500 text-black"
+          onchange="filterCourses()">
+    <option value="all">All Departments</option>
+    <option value="developer">Developer</option>
+    <option value="designer">Designer</option>
+    <option value="construction">Construction</option>
+    <option value="aiSecurity">AI Security</option>
+    <option value="abm">Admin & Business</option>
+  </select>
+</section>
 <!-- ================= CONTENT ================= -->
 <section class="max-w-4xl mx-auto mt-12 px-4 pb-24">
 
 <!-- ===== DEVELOPER ===== -->
 <div id="developerSection">
   <h2 class="text-xl font-bold mb-6 text-pink-400">Department of Software Development and Engineering</h2>
-  <div class="card p-5 mb-4">
-    <h3 class="font-bold text-lg flex items-center gap-2">
-      <i class="fas fa-code"></i> Frontend Development
-    </h3>
+  <div class="card">
+    <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-code"></i> Frontend Development</h3>
     <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
     <p class="text-gray-300 mb-4">Build responsive, interactive user interfaces using modern web technologies.</p>
     <a href="frontend.html" class="inline-block bg-pink-400 text-black px-5 py-2 rounded font-bold">▶ Start Learning</a>
   </div>
-  <div class="card p-5 mb-4">
-    <h3 class="font-bold text-lg flex items-center gap-2">
-      <i class="fas fa-server"></i> Backend Development
-    </h3>
+  <div class="card">
+    <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-server"></i> Backend Development</h3>
     <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
     <p class="text-gray-300 mb-4">Learn server-side logic, APIs, databases, and system architecture.</p>
     <a href="backend.html" class="inline-block bg-pink-400 text-black px-5 py-2 rounded font-bold">▶ Start Learning</a>
   </div>
-  <div class="card p-5 mb-6">
-    <h3 class="font-bold text-lg flex items-center gap-2">
-      <i class="fas fa-layer-group"></i> Full Stack Development
-    </h3>
+  <div class="card">
+    <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-layer-group"></i> Full Stack Development</h3>
     <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
     <p class="text-gray-300 mb-4">Combine frontend and backend skills to build complete applications.</p>
     <a href="fullstack.html" class="inline-block bg-pink-400 text-black px-5 py-2 rounded font-bold">▶ Start Learning</a>
@@ -120,26 +116,20 @@ setInterval(showNextSlide, 4000);
 <!-- ===== DESIGNER ===== -->
 <div id="designerSection" class="hidden">
   <h2 class="text-xl font-bold mb-6 text-pink-400">Department of Software Design and Innovation</h2>
-  <div class="card p-5 mb-4">
-    <h3 class="font-bold text-lg flex items-center gap-2">
-      <i class="fas fa-pen-nib"></i> Logo Design
-    </h3>
+  <div class="card">
+    <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-pen-nib"></i> Logo Design</h3>
     <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
     <p class="text-gray-300 mb-4">Learn branding, identity creation, and professional logo design.</p>
     <a href="designer.html" class="inline-block bg-pink-400 text-black px-5 py-2 rounded font-bold">▶ Start Learning</a>
   </div>
-  <div class="card p-5 mb-4">
-    <h3 class="font-bold text-lg flex items-center gap-2">
-      <i class="fas fa-eye"></i> Visual Design
-    </h3>
+  <div class="card">
+    <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-eye"></i> Visual Design</h3>
     <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
     <p class="text-gray-300 mb-4">Master layout systems, colour theory, and visual hierarchy.</p>
     <a href="designer2.html" class="inline-block bg-pink-400 text-black px-5 py-2 rounded font-bold">▶ Start Learning</a>
   </div>
-  <div class="card p-5 mb-6">
-    <h3 class="font-bold text-lg flex items-center gap-2">
-      <i class="fas fa-palette"></i> Graphic Design
-    </h3>
+  <div class="card">
+    <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-palette"></i> Graphic Design</h3>
     <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
     <p class="text-gray-300 mb-4">Create posters, banners, and digital designs professionally.</p>
     <a href="graphic.html" class="inline-block bg-pink-400 text-black px-5 py-2 rounded font-bold">▶ Start Learning</a>
@@ -149,18 +139,14 @@ setInterval(showNextSlide, 4000);
 <!-- ===== CONSTRUCTION ===== -->
 <div id="constructionSection" class="hidden">
   <h2 class="text-xl font-bold mb-6 text-orange-400">Department of Construction Technology</h2>
-  <div class="card p-5 mb-4">
-    <h3 class="font-bold text-lg flex items-center gap-2">
-      <i class="fas fa-hard-hat"></i> Project Management Technology
-    </h3>
+  <div class="card">
+    <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-hard-hat"></i> Project Management Technology</h3>
     <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
     <p class="text-gray-300 mb-4">Live classes teaching project management skills to operate construction projects efficiently.</p>
     <a href="projectman.html" class="inline-block bg-orange-400 text-black px-5 py-2 rounded font-bold">▶ Start Learning</a>
   </div>
-  <div class="card p-5 mb-6">
-    <h3 class="font-bold text-lg flex items-center gap-2">
-      <i class="fas fa-building"></i> Construction Technology
-    </h3>
+  <div class="card">
+    <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-building"></i> Construction Technology</h3>
     <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
     <p class="text-gray-300 mb-4">Learn civil engineering fundamentals & AutoCAD basics to design construction projects.</p>
     <a href="construction.html" class="inline-block bg-orange-400 text-black px-5 py-2 rounded font-bold">▶ Start Learning</a>
@@ -170,30 +156,36 @@ setInterval(showNextSlide, 4000);
 <!-- ===== AI SECURITY ===== -->
 <div id="aiSecuritySection" class="hidden">
   <h2 class="text-xl font-bold mb-6 text-green-400">Department of AI Investigation & Security</h2>
-  <div class="card p-5 mb-4">
-    <h3 class="font-bold text-lg flex items-center gap-2">
-      <i class="fas fa-shield-alt"></i> Office Security Technology
-    </h3>
+  <div class="card">
+    <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-shield-alt"></i> Office Security Technology</h3>
     <p class="text-gray-400 text-sm mb-2">⏱ Duration: 1 Month</p>
     <p class="text-gray-300 mb-4">Train personnel on security operations, surveillance, and XFORCE Security protocols.</p>
     <a href="office.html" class="inline-block bg-green-400 text-black px-5 py-2 rounded font-bold">▶ Start Learning</a>
   </div>
-  <div class="card p-5 mb-4">
-    <h3 class="font-bold text-lg flex items-center gap-2">
-      <i class="fas fa-user-cog"></i> Admin Technologist
-    </h3>
-    <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
-    <p class="text-gray-300 mb-4">Operate the NewEra Investigation system efficiently as an authorized admin.</p>
-    <a href="admintech.html" class="inline-block bg-green-400 text-black px-5 py-2 rounded font-bold">▶ Start Learning</a>
-  </div>
-  <div class="card p-5 mb-6">
-    <h3 class="font-bold text-lg flex items-center gap-2">
-      <i class="fas fa-robot"></i> AI Investigation Technologist
-    </h3>
+  <div class="card">
+    <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-robot"></i> AI Investigation Technologist</h3>
     <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
     <p class="text-gray-300 mb-4">Learn to utilize AI-assisted investigation tools for NewEra case analysis.</p>
     <a href="investigate.html" class="inline-block bg-green-400 text-black px-5 py-2 rounded font-bold">▶ Start Learning</a>
   </div>
+</div>
+
+<!-- ===== ADMINISTRATION & BUSINESS MANAGEMENT ===== -->
+<div id="abmSection" class="hidden">
+  <h2 class="text-xl font-bold mb-6 text-blue-400">Department of Administration & Business Management</h2>
+  <div class="card">
+    <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-building"></i> Administration Technology</h3>
+    <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
+    <p class="text-gray-300 mb-4">Learn office management, organization systems, and administrative workflows.</p>
+    <a href="admintech.html" class="inline-block bg-blue-400 text-black px-5 py-2 rounded font-bold">▶ Start Learning</a>
+  </div>
+  <div class="card">
+    <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-briefcase"></i> Business Management</h3>
+    <p class="text-gray-400 text-sm mb-2">⏱ Duration: 2 Weeks</p>
+    <p class="text-gray-300 mb-4">Gain skills in strategic planning, business operations, and team management.</p>
+    <a href="business.html" class="inline-block bg-blue-400 text-black px-5 py-2 rounded font-bold">▶ Start Learning</a>
+  </div>
+
 </div>
 
 </section>
@@ -204,23 +196,64 @@ function showDepartment(dept) {
     developer: document.getElementById('developerSection'),
     designer: document.getElementById('designerSection'),
     construction: document.getElementById('constructionSection'),
-    aiSecurity: document.getElementById('aiSecuritySection')
+    aiSecurity: document.getElementById('aiSecuritySection'),
+    abm: document.getElementById('abmSection')
   };
 
-  // Hide all sections
   for (let key in sections) {
     sections[key].classList.add('hidden');
   }
-  // Show selected section
-  sections[dept].classList.remove('hidden');
 
-  // Update toggle button colors
+  if(sections[dept]) sections[dept].classList.remove('hidden');
+
+  // Update toggle buttons
   const buttons = document.querySelectorAll('.department-btn');
-  buttons.forEach(btn => {
-    btn.classList.remove('active', 'text-black');
-  });
-  const activeBtn = Array.from(buttons).find(b => b.textContent.toLowerCase().includes(dept.replace(/([A-Z])/g, ' $1').trim()));
-  if (activeBtn) activeBtn.classList.add('active');
+  buttons.forEach(btn => btn.classList.remove('active', 'text-black'));
+  const activeBtn = Array.from(buttons).find(b => b.textContent.toLowerCase().includes(dept.toLowerCase()));
+  if(activeBtn) activeBtn.classList.add('active', 'text-black');
+}
+</script>
+<script>
+function filterCourses() {
+  const searchTerm = document.getElementById('courseSearch').value.toLowerCase();
+  const deptFilter = document.getElementById('departmentFilter').value;
+
+  const sections = {
+    developer: document.getElementById('developerSection'),
+    designer: document.getElementById('designerSection'),
+    construction: document.getElementById('constructionSection'),
+    aiSecurity: document.getElementById('aiSecuritySection'),
+    abm: document.getElementById('abmSection')
+  };
+
+  for (let key in sections) {
+    const section = sections[key];
+    let showSection = false;
+
+    if (deptFilter === 'all' || deptFilter === key) {
+      // Check if any course inside matches search
+      const cards = section.querySelectorAll('.card');
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+          card.style.display = 'block';
+          showSection = true;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    } else {
+      section.querySelectorAll('.card').forEach(c => c.style.display = 'none');
+      showSection = false;
+    }
+
+    // Show or hide section based on filter
+    if (showSection) {
+      section.classList.remove('hidden');
+    } else {
+      section.classList.add('hidden');
+    }
+  }
 }
 </script>
 
