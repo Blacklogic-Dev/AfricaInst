@@ -15,12 +15,10 @@ body {
   font-family:Courier New, monospace;
   padding:20px;
 }
-
 .container {
-  max-width:800px;
+  max-width:900px;
   margin:auto;
 }
-
 .card {
   background:#111;
   border-radius:16px;
@@ -28,12 +26,10 @@ body {
   box-shadow:0 0 20px #00ffff;
   margin-bottom:30px;
 }
-
 h2 {
   text-align:center;
   margin-bottom:15px;
 }
-
 select, input {
   width:100%;
   padding:10px;
@@ -43,29 +39,6 @@ select, input {
   background:#222;
   color:#ff69b4;
 }
-
-.toggle {
-  display:flex;
-  justify-content:center;
-  margin-bottom:15px;
-}
-
-.toggle button {
-  padding:8px 18px;
-  margin:0 5px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  background:#222;
-  color:#ff69b4;
-  font-weight:bold;
-}
-
-.toggle button.active {
-  background:#ff69b4;
-  color:#000;
-}
-
 button.generate {
   width:100%;
   padding:12px;
@@ -77,7 +50,6 @@ button.generate {
   font-weight:bold;
   cursor:pointer;
 }
-
 pre.result {
   background:#fff;
   color:#000;
@@ -87,7 +59,6 @@ pre.result {
   display:none;
   white-space:pre-wrap;
 }
-
 .download {
   margin-top:10px;
   background:#ff69b4;
@@ -99,132 +70,172 @@ pre.result {
   cursor:pointer;
   display:none;
 }
+.verse {
+  margin-top:15px;
+  color:#00ffff;
+  font-weight:bold;
+  text-align:center;
+}
 </style>
 </head>
-
 <body>
 
 <div class="container">
 
-  <!-- ASSIGNMENT 1 -->
-  <div class="card">
-    <h2>Assignment 1 – Project Build</h2>
+<!-- ASSIGNMENT 1 - INDIVIDUAL -->
+<div class="card">
+  <h2>Assignment 1 – Individual Project</h2>
+  <input type="text" id="sid1" placeholder="Student ID" required>
 
-    <div class="toggle">
-      <button id="dev1" class="active" onclick="setMode(1,'Developer')">Developer</button>
-      <button id="des1" onclick="setMode(1,'Designer')">Designer</button>
-    </div>
+  <select id="dept1">
+    <option value="DEP-SD">Software Development & Engineering</option>
+    <option value="DEP-DES">Design & Innovation</option>
+    <option value="DEP-CON">Construction & Project Management</option>
+    <option value="DEP-AI">Office Security & AI Investigation</option>
+    <option value="DEP-ABM">Administration & Business Management</option>
+  </select>
 
-    <input type="text" id="sid1" placeholder="Student ID" required>
+  <button class="generate" onclick="generateAssignment(1)">Generate Individual Project</button>
+  <pre class="result" id="result1"></pre>
+  <div class="verse" id="verse1"></div>
+  <button class="download" id="download1" onclick="downloadPDF(1)">Download PDF</button>
+</div>
 
-    <select id="dept1">
-      <option>Software Development & Engineering</option>
-      <option>Software Design & Innovation</option>
-    </select>
+<!-- ASSIGNMENT 2 - COLLABORATION -->
+<div class="card">
+  <h2>Assignment 2 – Collaborative Project</h2>
+  <input type="text" id="sid2" placeholder="Team ID / Group Name" required>
 
-    <select id="course1">
-      <option>Frontend Development</option>
-      <option>Backend Development</option>
-      <option>Full Stack Development</option>
-      <option>Logo Design</option>
-      <option>Visual Design</option>
-      <option>Graphic Design</option>
-    </select>
+  <select id="dept2">
+    <option value="DEP-SD">Software Development & Engineering + Design</option>
+    <option value="DEP-CON">Construction & Project Management</option>
+    <option value="DEP-ABM">Admin & Business Management</option>
+    <option value="DEP-AI">Office Security & AI Investigation</option>
+  </select>
 
-    <button class="generate" onclick="generateProject(1)">Generate Project</button>
-
-    <pre class="result" id="result1"></pre>
-    <button class="download" id="download1" onclick="downloadPDF(1)">Download Project PDF</button>
-  </div>
-
-  <!-- ASSIGNMENT 2 -->
-  <div class="card">
-    <h2>Assignment 2 – Research & Problem Solving</h2>
-
-    <div class="toggle">
-      <button id="dev2" class="active" onclick="setMode(2,'Developer')">Developer</button>
-      <button id="des2" onclick="setMode(2,'Designer')">Designer</button>
-    </div>
-
-    <input type="text" id="sid2" placeholder="Student ID" required>
-
-    <select id="dept2">
-      <option>Software Development & Engineering</option>
-      <option>Software Design & Innovation</option>
-    </select>
-
-    <select id="course2">
-      <option>Frontend Development</option>
-      <option>Backend Development</option>
-      <option>Full Stack Development</option>
-      <option>Logo Design</option>
-      <option>Visual Design</option>
-      <option>Graphic Design</option>
-    </select>
-
-    <button class="generate" onclick="generateProject(2)">Generate Research Task</button>
-
-    <pre class="result" id="result2"></pre>
-    <button class="download" id="download2" onclick="downloadPDF(2)">Download Project PDF</button>
-  </div>
+  <button class="generate" onclick="generateAssignment(2)">Generate Collaborative Project</button>
+  <pre class="result" id="result2"></pre>
+  <div class="verse" id="verse2"></div>
+  <button class="download" id="download2" onclick="downloadPDF(2)">Download PDF</button>
+</div>
 
 </div>
 
 <script>
-const buildProjects = [
-  "Build a responsive website solving a real community problem.",
-  "Develop a digital system that automates a manual process.",
-  "Create a user-friendly interface for an education platform.",
-  "Design a branding identity for a startup.",
-  "Build a project using AI-assisted development tools."
+const individualProjects = {
+  "DEP-SD":[
+    {title:"Portfolio Website",problem:"A local business requests a responsive portfolio website. You need to design pages showing services and skills.",deliverable:"Functional website + 1–3 pages explanation"},
+    {title:"JS Calculator App",problem:"Build a calculator web app that performs arithmetic operations for educational purposes.",deliverable:"Functional website + 1 page explanation"},
+    {title:"Todo List App",problem:"Create a dynamic Todo list app to manage tasks using HTML/CSS/JS.",deliverable:"Functional app + 1 page explanation"},
+    {title:"Blog Template",problem:"Develop a blog template with multiple pages and navigation menu.",deliverable:"3-page functional template + short explanation"},
+    {title:"Event Landing Page",problem:"Design an event landing page showing schedule, location, and registration form.",deliverable:"Functional page + 2-page explanation"}
+  ],
+  "DEP-DES":[
+    {title:"Logo Design Startup",problem:"A startup requires a logo. Research colors, style, and AI generation.",deliverable:"AI-generated logo + 1 paragraph"},
+    {title:"Brand Identity Concept",problem:"Develop branding concept for a small brand including colors and fonts.",deliverable:"Visual mockup + 1-page explanation"},
+    {title:"App Icon",problem:"Design an app icon for a mobile app using AI tools.",deliverable:"Icon + 1 paragraph"},
+    {title:"Poster Design",problem:"Create a poster promoting a local event with AI design tool.",deliverable:"Poster + explanation"},
+    {title:"Social Media Visuals",problem:"Design a set of 3 visuals for social media campaign.",deliverable:"3 images + short explanation"}
+  ],
+  "DEP-CON":[
+    {title:"Construction Drawing Analysis",problem:"Given construction drawings, assess components and explain to site manager.",deliverable:"2–3 page report"},
+    {title:"Material List Report",problem:"Analyze drawings and create a materials list with quantities.",deliverable:"2-page report"},
+    {title:"Safety Inspection",problem:"Review drawing for safety compliance issues and recommend solutions.",deliverable:"2-page report"},
+    {title:"Project Phasing Plan",problem:"Given drawings, propose a phased construction schedule.",deliverable:"2–3 page report"},
+    {title:"Cost Estimation",problem:"Estimate basic project cost based on given construction drawings.",deliverable:"2–3 page report"}
+  ],
+  "DEP-AI":[
+    {title:"Crime Case Report",problem:"Analyze a provided crime case and crime statistics. Recommend solution.",deliverable:"2–3 page report"},
+    {title:"AI Security Analysis",problem:"Given a security scenario, analyze and provide improvements using AI.",deliverable:"2-page report"},
+    {title:"Incident Pattern Analysis",problem:"Study patterns from a dataset of incidents and suggest solutions.",deliverable:"2–3 page report"},
+    {title:"Office Security Audit",problem:"Evaluate a small office security plan and propose AI-based improvements.",deliverable:"2-page report"},
+    {title:"Investigation Simulation",problem:"Simulate a case study investigation and submit findings.",deliverable:"2–3 page report"}
+  ],
+  "DEP-ABM":[
+    {title:"Business Analysis Report",problem:"Given a mini-business idea, research feasibility and write report.",deliverable:"2–3 page report"},
+    {title:"Admin Letter",problem:"Draft a formal letter to communicate an internal improvement.",deliverable:"1 page Word letter"},
+    {title:"Funding Proposal",problem:"Write a mini funding proposal for a business idea.",deliverable:"2–3 page report"},
+    {title:"Workflow Documentation",problem:"Document a process workflow for a business scenario.",deliverable:"2-page report"},
+    {title:"Market Research",problem:"Analyze market data for a small business and submit report.",deliverable:"2–3 page report"}
+  ]
+};
+
+const collaborativeProjects = {
+  "DEP-SD":[
+    {title:"Modern UX/UI Website",problem:"Team must build a modern responsive website for a simulated client.",deliverable:"Functional site + 2-page collaborative report"},
+    {title:"E-commerce Prototype",problem:"Develop a small e-commerce prototype including product pages.",deliverable:"Functional site + 2-page report"},
+    {title:"Dashboard App",problem:"Build a dashboard app showing analytics and interactivity.",deliverable:"Functional app + 2-page report"},
+    {title:"Portfolio Enhancement",problem:"Combine individual portfolios into one showcase platform.",deliverable:"Website + report"},
+    {title:"Community Services Portal",problem:"Design portal for community services scheduling and info.",deliverable:"Functional website + report"}
+  ],
+  "DEP-CON":[
+    {title:"Construction + Project Management",problem:"Team receives drawings. Plan project schedule and budget based on drawings.",deliverable:"Collaborative 2–3 page report + budget document"},
+    {title:"Phasing + Cost Plan",problem:"Analyze drawings and create phased plan with cost estimation.",deliverable:"Collaborative report + spreadsheet"},
+    {title:"Site Risk Analysis",problem:"Team reviews drawings, identifies risks and mitigation steps.",deliverable:"2–3 page report"},
+    {title:"Material Procurement Plan",problem:"Create plan for materials procurement based on drawings.",deliverable:"Collaborative 2-page report"},
+    {title:"Timeline & Budget Simulation",problem:"Simulate full project timeline and estimate costs.",deliverable:"2–3 page report + budget"}
+  ],
+  "DEP-ABM":[
+    {title:"Business Plan Collaborative",problem:"Team receives a business idea. Create funding-ready business plan.",deliverable:"3–4 page collaborative report"},
+    {title:"Workflow Optimization",problem:"Team drafts workflow improvements for a business scenario.",deliverable:"3-page report"},
+    {title:"Market Entry Plan",problem:"Analyze market and propose entry strategy.",deliverable:"3-page report"},
+    {title:"Funding Proposal Collaboration",problem:"Write a collaborative funding proposal.",deliverable:"3-page report"},
+    {title:"Operational Plan",problem:"Draft operational plan for business idea.",deliverable:"3-page report"}
+  ],
+  "DEP-AI":[
+    {title:"Crime & Security Collaboration",problem:"Team analyzes case scenario + crime stats. Propose solutions.",deliverable:"2–3 page collaborative report"},
+    {title:"Office Security Team Audit",problem:"Collaborate on security audit of office scenario.",deliverable:"2–3 page report"},
+    {title:"Investigation Simulation Team",problem:"Simulate an AI investigation case and submit findings.",deliverable:"2–3 page report"},
+    {title:"Data Analysis Security Case",problem:"Analyze data from security incidents.",deliverable:"2–3 page report"},
+    {title:"Risk Assessment Collaboration",problem:"Team evaluates risks and proposes solutions.",deliverable:"2–3 page report"}
+  ]
+};
+
+// Bible verses
+const verses = [
+  "Commit to the Lord whatever you do, and your plans will succeed. – Proverbs 16:3",
+  "Whatever you do, work at it with all your heart. – Colossians 3:23",
+  "Plans fail for lack of counsel, but with many advisers they succeed. – Proverbs 15:22",
+  "Let all that you do be done in love. – 1 Corinthians 16:14",
+  "The heart of the discerning acquires knowledge. – Proverbs 18:15",
+  "Do not withhold good from those to whom it is due. – Proverbs 3:27",
+  "Commit your work to the Lord, and your plans will be established. – Proverbs 16:3"
 ];
 
-const researchProjects = [
-  "Research how AI improves software productivity.",
-  "Analyze the impact of UI/UX on user behavior.",
-  "Study automation challenges in Africa.",
-  "Research ethical use of AI in software engineering.",
-  "Analyze modern web technologies and their future."
-];
+function generateAssignment(num){
+  const dept = document.getElementById(`dept${num}`).value;
+  const sid = document.getElementById(`sid${num}`).value;
 
-function setMode(num, mode) {
-  document.getElementById(`dev${num}`).classList.remove("active");
-  document.getElementById(`des${num}`).classList.remove("active");
+  const list = num===1 ? individualProjects[dept] : collaborativeProjects[dept];
+  const project = list[Math.floor(Math.random()*list.length)];
 
-  if(mode === "Developer") {
-    document.getElementById(`dev${num}`).classList.add("active");
-  } else {
-    document.getElementById(`des${num}`).classList.add("active");
-  }
-}
-
-function generateProject(num) {
+  // Friday 08:00 release, due Sunday 23:59
   const now = new Date();
-  const deadline = new Date(now.getTime() + 72 * 60 * 60 * 1000);
+  const release = new Date();
+  release.setHours(8,0,0);
+  release.setDate(now.getDate() + ((5-now.getDay()+7)%7)); // next Friday
+  const deadline = new Date(release.getTime() + (2*24*60*60*1000) + (15*60*60+59*60)*1000); // Sunday 23:59
 
   const format = d => d.toLocaleString();
-
-  const list = num === 1 ? buildProjects : researchProjects;
-  const project = list[Math.floor(Math.random() * list.length)];
 
   const receipt = `
 ==============================
 Africa Institution of Technology
 ==============================
 
-Student ID: ${document.getElementById(`sid${num}`).value}
-Department: ${document.getElementById(`dept${num}`).value}
-Course: ${document.getElementById(`course${num}`).value}
+Student ID / Team: ${sid}
+Department: ${dept}
 
-ASSIGNED TASK:
-${project}
+PROJECT TITLE: ${project.title}
 
-------------------------------
-Submission Date & Time:
-${format(now)}
+CASE STUDY / PROBLEM:
+${project.problem}
 
-Deadline (72 Hours):
-${format(deadline)}
+EXPECTED DELIVERABLE:
+${project.deliverable}
+
+ASSIGNMENT RELEASE: ${format(release)}
+SUBMISSION DEADLINE: ${format(deadline)}
 
 ------------------------------
 This project is officially assigned by
@@ -236,18 +247,20 @@ Hardware and Projects Pty Ltd.
 
   const result = document.getElementById(`result${num}`);
   const download = document.getElementById(`download${num}`);
+  const verseDiv = document.getElementById(`verse${num}`);
 
   result.textContent = receipt;
   result.style.display = "block";
   download.style.display = "block";
-
   result.dataset.content = receipt;
+
+  // Pick random verse
+  verseDiv.textContent = verses[Math.floor(Math.random()*verses.length)];
 }
 
-function downloadPDF(num) {
+function downloadPDF(num){
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-
   const content = document.getElementById(`result${num}`).dataset.content;
   doc.setFont("courier");
   doc.setFontSize(10);
