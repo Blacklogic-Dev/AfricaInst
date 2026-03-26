@@ -4,17 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Africa Institution of Technology – Login/Admission</title>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
-
 <style>
 body {
     background: #0a0a0a;
     color: #ff69b4;
     font-family: 'Courier New', monospace;
 }
-
 .card {
     background: rgba(20,20,20,0.95);
     border-radius: 16px;
@@ -23,78 +21,18 @@ body {
     width: 100%;
     box-shadow: 0 0 20px #00ffff;
 }
-
-.toggle {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-}
-
-.toggle button {
-    padding: 0.5rem 1.5rem;
-    margin: 0 0.5rem;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    background: #222;
-    color: #ff69b4;
-}
-
-.toggle button.active {
-    background: #ff69b4;
-    color: #000;
-}
-
-.form-group {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.form-group input,
-.form-group select {
-    padding: 0.6rem;
-    border-radius: 6px;
-    border: none;
-    background: #222;
-    color: #ff69b4;
-    width: 100%;
-}
-
-button.submit {
-    background: #ff69b4;
-    color: #000;
-    padding: 0.8rem;
-    border-radius: 10px;
-    font-weight: bold;
-    width: 100%;
-    margin-top: 5px;
-}
-
-button.download {
-    background: #00ffff;
-    color: #000;
-    padding: 0.8rem;
-    border-radius: 10px;
-    font-weight: bold;
-    width: 100%;
-    margin-top: 5px;
-}
-
-pre.receipt {
-    background: white;
-    color: black;
-    padding: 1rem;
-    border-radius: 12px;
-    margin-top: 1rem;
-    white-space: pre-wrap;
-    font-family: 'Courier New', monospace;
-}
+.toggle { display:flex; justify-content:center; margin-bottom:1rem; }
+.toggle button { padding:0.5rem 1.5rem; margin:0 0.5rem; border:none; border-radius:8px; font-weight:bold; cursor:pointer; background:#222; color:#ff69b4; }
+.toggle button.active { background:#ff69b4; color:#000; }
+.form-group { margin-bottom:1rem; display:flex; flex-direction:column; align-items:flex-start; position:relative; }
+.form-group input, .form-group select { padding:0.6rem; border-radius:6px; border:none; background:#222; color:#ff69b4; width:100%; }
+button.submit { background:#ff69b4; color:#000; padding:0.8rem; border-radius:10px; font-weight:bold; width:100%; margin-top:5px; }
+button.download { background:#00ffff; color:#000; padding:0.8rem; border-radius:10px; font-weight:bold; width:100%; margin-top:5px; }
+pre.receipt { background:white; color:black; padding:1rem; border-radius:12px; margin-top:1rem; white-space:pre-wrap; font-family:'Courier New', monospace; }
+#togglePassword { position:absolute; right:105px; top:32px; cursor:pointer; color:#ff69b4; }
+#generatePassword { position:absolute; right:5px; top:28px; background:#ff69b4; color:#000; border:none; padding:0.3rem 0.6rem; border-radius:5px; cursor:pointer; }
 </style>
 </head>
-
 <body class="flex items-center justify-center min-h-screen">
 
 <div class="card text-center">
@@ -109,22 +47,20 @@ pre.receipt {
 
 <!-- LOGIN FORM -->
 <form id="loginForm">
-<div class="form-group">
-<label>Student ID</label>
-<input type="text" id="studentID" required>
-</div>
+  <div class="form-group">
+    <label>Student ID</label>
+    <input type="text" id="studentID" maxlength="6" pattern="\d{6}" inputmode="numeric" placeholder="Enter 6-digit ID" required>
+  </div>
 
-<div class="form-group" style="position:relative;">
-<label>Password</label>
-<input type="text" id="password" placeholder="Click generate" readonly required>
-<button type="button" id="generatePassword"
-style="position:absolute; right:5px; top:28px; padding:0.3rem 0.6rem; border:none; border-radius:5px; background:#ff69b4; color:#000; cursor:pointer;">
-🔒 Generate
-</button>
-</div>
-<button type="button" class="submit" onclick="window.location.href='dashboard.html'">
-  Login
-</button>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Click generate" readonly required>
+    <i id="togglePassword" class="fas fa-eye"></i>
+    <button type="button" id="generatePassword">🔒 Generate</button>
+  </div>
+
+  <button type="submit" class="submit">Login</button>
+  <p id="message"></p>
 </form>
 
 <!-- ADMISSION FORM -->
@@ -161,7 +97,7 @@ style="position:absolute; right:5px; top:28px; padding:0.3rem 0.6rem; border:non
   <option value="">Select Department</option>
   <option value="DEP-SD">Software Development & Engineering</option>
   <option value="DEP-DES">Software Design & Innovation</option>
-  <option value="DEP-CON">Construction Technology</option>
+  <option value="DEP-CON">Construction Technology & Project Management</option>
   <option value="DEP-AI">AI Investigation & Security</option>
   <option value="DEP-ABM">Administration & Business Management</option>
 </select>
@@ -179,21 +115,7 @@ style="position:absolute; right:5px; top:28px; padding:0.3rem 0.6rem; border:non
 <button id="downloadPDF" class="download" style="display:none">📄 Download Admission Letter (PDF)</button>
 
 <script>
-// PASSWORD GENERATOR
-function generatePassword(length = 10) {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let password = "";
-  for (let i = 0; i < length; i++) {
-    password += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return password;
-}
-
-document.getElementById("generatePassword").onclick = function(){
-  document.getElementById("password").value = generatePassword();
-};
-
-// TOGGLE FORMS
+// -------------------- TOGGLE FORMS --------------------
 const loginBtn = document.getElementById("loginBtn");
 const admissionBtn = document.getElementById("admissionBtn");
 const loginForm = document.getElementById("loginForm");
@@ -213,16 +135,56 @@ admissionBtn.onclick = () => {
   loginBtn.classList.remove("active");
 };
 
-// COURSES
+// -------------------- PASSWORD GENERATOR & TOGGLE --------------------
+const studentInput = document.getElementById('studentID');
+const passwordInput = document.getElementById('password');
+const togglePassword = document.getElementById('togglePassword');
+const generateBtn = document.getElementById('generatePassword');
+const message = document.getElementById('message');
+const form = document.getElementById('loginForm');
+
+generateBtn.addEventListener('click', () => {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$';
+  let pass = '';
+  for (let i=0; i<8; i++) {
+    pass += chars.charAt(Math.floor(Math.random()*chars.length));
+  }
+  passwordInput.value = pass;
+});
+
+togglePassword.addEventListener('click', () => {
+  const type = passwordInput.type === 'password' ? 'text' : 'password';
+  passwordInput.type = type;
+  togglePassword.classList.toggle('fa-eye-slash');
+});
+
+// -------------------- LOGIN --------------------
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const studentID = studentInput.value;
+  const password = passwordInput.value;
+
+  if(/^\d{6}$/.test(studentID) && password.length > 0) {
+    message.textContent = '✅ Access Granted';
+    message.style.color = '#00ff00';
+    setTimeout(() => { window.location.href='dashboard.html'; }, 1500);
+  } else {
+    message.textContent = '❌ Access Denied';
+    message.style.color = '#ff0000';
+  }
+});
+
+// -------------------- COURSES --------------------
 const departmentSelect = document.getElementById("departmentSelect");
 const courseSelect = document.getElementById("courseSelect");
+const courseGroup = document.getElementById("courseGroup");
 
 const courses = {
   "DEP-SD": ["Frontend Development","Backend Development","Full Stack Development"],
-  "DEP-DES": ["Logo Design","Visual Design"],
-  "DEP-CON": ["Construction Technology","AutoCAD Civil"],
+  "DEP-DES": ["Logo Design","Visual Design" ,"Graphic Design"],
+  "DEP-CON": ["Construction Technology","Project Management Technology"],
   "DEP-AI": ["Office Security Technology","AI Investigation Technologist"],
-  "DEP-ABM": ["Administration Technology","Business Management",]
+  "DEP-ABM": ["Administration Technology","Business Management"]
 };
 
 departmentSelect.addEventListener("change", function(){
@@ -240,7 +202,7 @@ departmentSelect.addEventListener("change", function(){
   });
 });
 
-// REGISTER STUDENT
+// -------------------- REGISTER STUDENT --------------------
 document.getElementById("registerStudent").onclick = function(){
   const name = document.getElementById("fullName").value;
   const id = document.getElementById("idNumber").value;
@@ -283,19 +245,16 @@ Date: ${new Date().toLocaleString()}
   receipt.style.display = "block";
   document.getElementById("downloadPDF").style.display = "block";
 
-  // Send to WhatsApp (optional)
-  const message = encodeURIComponent(receiptText + "\nEmail: "+email+"\nAddress: "+address+"\nWhatsApp: "+whatsapp);
-  window.open(`https://wa.me/27606614909?text=${message}`,"_blank");
+  const messageText = encodeURIComponent(receiptText + "\nEmail: "+email+"\nAddress: "+address+"\nWhatsApp: "+whatsapp);
+  window.open(`https://wa.me/27606614909?text=${messageText}`,"_blank");
 };
 
-// DOWNLOAD PDF
+// -------------------- DOWNLOAD PDF --------------------
 document.getElementById("downloadPDF").onclick = function(){
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-
   const logo = new Image();
   logo.src = "africai.jpg";
-
   logo.onload = function(){
     doc.addImage(logo,"JPEG",80,10,50,30);
     doc.setFont("Courier","Normal");
@@ -306,6 +265,5 @@ document.getElementById("downloadPDF").onclick = function(){
   };
 };
 </script>
-
 </body>
 </html>
