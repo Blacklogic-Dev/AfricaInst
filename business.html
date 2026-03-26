@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Business Management – AIT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #1e90ff;
+      font-family: 'Courier New', monospace;
+    }
+    .card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 14px;
+      box-shadow: 0 0 15px rgba(30,144,255,0.2);
+    }
+    .btn {
+      font-weight: bold;
+    }
+    .progress-bar {
+      background: #222;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress {
+      background: #1e90ff;
+      width: 0%;
+      height: 20px;
+      transition: width 0.5s;
+    }
+    iframe {
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body class="pb-20">
+
+  <!-- ================= BANNER ================= -->
+  <section class="w-full h-[300px] flex items-center justify-center bg-cover bg-center"
+    style="background-image:url('business.jpg')">
+    <div class="bg-black/80 p-8 rounded-xl border border-blue-400 text-center">
+      <h1 class="text-4xl font-bold">Business Management</h1>
+      <p class="text-gray-300 mt-2">Africa Institution of Technology</p>
+      <p class="text-gray-400 mt-1">⏱ Duration: 8 Modules – Learn leadership, finance, and strategy</p>
+    </div>
+  </section>
+    <!-- ================= INSTRUCTIONS ================= -->
+  <section class="max-w-4xl mx-auto mt-6 px-4">
+    <p class="text-pink-400 font-bold mb-2">Instructions:</p>
+    <ul class="list-decimal list-inside text-gray-300 mb-4">
+      <li>Watch the video lessons completely</li>
+      <li>Copy the Module instructions using the clipboard button</li>
+      <li>Click the AI button, paste the prompt, and start learning</li>
+    </ul>
+    <button class="btn px-4 py-2 bg-green-500 text-black rounded flex items-center gap-2" 
+            onclick="window.open('https://chat.openai.com', '_blank')">
+      <i class="fas fa-robot"></i> Open AI Assistant
+    </button>
+  </section>
+
+  <!-- ================= PROGRESS ================= -->
+  <section class="max-w-4xl mx-auto mt-8 px-4">
+    <p class="mb-2">Course Progress:</p>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+  </section>
+
+
+    <!-- ================= MODULES ================= -->
+<section class="max-w-4xl mx-auto mt-6 px-4 flex flex-col gap-6">
+
+  <!-- Module 1 -->
+  <div class="card p-4">
+    <h2 class="font-bold text-lg mb-2">Module 1 – Business Fundamentals <span class="text-gray-400">(YouTube)</span></h2>
+    <iframe class="w-full aspect-video mb-3 rounded-lg"
+      src="https://www.youtube.com/embed/MEZT9A7kgoE"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    <p class="text-gray-300 mb-3">Introduction to business structures, principles, and operations.</p>
+    <button class="btn px-4 py-2 bg-blue-400 text-black rounded copy-btn"
+      data-prompt="Introduction to business structures, principles, and operations.">
+      <i class="fas fa-clipboard"></i> Copy Prompt
+    </button>
+  </div>
+
+  <!-- Module 2 -->
+  <div class="card p-4">
+    <h2 class="font-bold text-lg mb-2">Module 2 – Leadership & Management</h2>
+    <iframe class="w-full aspect-video mb-3 rounded-lg"
+      src="https://www.youtube.com/embed/EJHPltmAULA"
+      allowfullscreen></iframe>
+    <p class="text-gray-300 mb-3">Learn effective leadership, team management, and organizational behavior.</p>
+    <button class="btn px-4 py-2 bg-blue-400 text-black rounded copy-btn"
+      data-prompt="Learn effective leadership, team management, and organizational behavior.">
+      <i class="fas fa-clipboard"></i> Copy Prompt
+    </button>
+  </div>
+
+  <!-- Module 3 -->
+  <div class="card p-4">
+    <h2 class="font-bold text-lg mb-2">Module 3 – Financial Management</h2>
+    <iframe class="w-full aspect-video mb-3 rounded-lg"
+      src="https://www.youtube.com/embed/8zq1NxyNIQY"
+      allowfullscreen></iframe>
+    <p class="text-gray-300 mb-3">Learn budgeting, accounting, and financial analysis for businesses.</p>
+    <button class="btn px-4 py-2 bg-blue-400 text-black rounded copy-btn"
+      data-prompt="Learn budgeting, accounting, and financial analysis for businesses.">
+      <i class="fas fa-clipboard"></i> Copy Prompt
+    </button>
+  </div>
+
+  <!-- Module 4 -->
+  <div class="card p-4">
+    <h2 class="font-bold text-lg mb-2">Module 4 – Marketing & Branding</h2>
+    <iframe class="w-full aspect-video mb-3 rounded-lg"
+      src="https://www.youtube.com/embed/VSWUiwUvGTk"
+      allowfullscreen></iframe>
+    <p class="text-gray-300 mb-3">Understand marketing strategies, branding, and customer engagement.</p>
+    <button class="btn px-4 py-2 bg-blue-400 text-black rounded copy-btn"
+      data-prompt="Understand marketing strategies, branding, and customer engagement.">
+      <i class="fas fa-clipboard"></i> Copy Prompt
+    </button>
+  </div>
+
+  <!-- Module 5 -->
+  <div class="card p-4">
+    <h2 class="font-bold text-lg mb-2">Module 5 – Human Resources</h2>
+    <iframe class="w-full aspect-video mb-3 rounded-lg"
+      src="https://www.youtube.com/embed/aPEUKLxxh_k"
+      allowfullscreen></iframe>
+    <p class="text-gray-300 mb-3">Explore hiring, training, payroll, and employee engagement strategies.</p>
+    <button class="btn px-4 py-2 bg-blue-400 text-black rounded copy-btn"
+      data-prompt="Explore hiring, training, payroll, and employee engagement strategies.">
+      <i class="fas fa-clipboard"></i> Copy Prompt
+    </button>
+  </div>
+
+  <!-- Module 6 -->
+  <div class="card p-4">
+    <h2 class="font-bold text-lg mb-2">Module 6 – Project Management</h2>
+    <iframe class="w-full aspect-video mb-3 rounded-lg"
+      src="https://www.youtube.com/embed/UTSKQe8aJXQ"
+      allowfullscreen></iframe>
+    <p class="text-gray-300 mb-3">Learn to plan, execute, and monitor business projects effectively.</p>
+    <button class="btn px-4 py-2 bg-blue-400 text-black rounded copy-btn"
+      data-prompt="Learn to plan, execute, and monitor business projects effectively.">
+      <i class="fas fa-clipboard"></i> Copy Prompt
+    </button>
+  </div>
+
+  <!-- Module 7 -->
+  <div class="card p-4">
+    <h2 class="font-bold text-lg mb-2">Module 7 – Strategic Planning</h2>
+    <iframe class="w-full aspect-video mb-3 rounded-lg"
+      src="https://www.youtube.com/embed/A7C4fCcdomg"
+      allowfullscreen></iframe>
+    <p class="text-gray-300 mb-3">Understand long-term business strategy, risk management, and growth planning.</p>
+    <button class="btn px-4 py-2 bg-blue-400 text-black rounded copy-btn"
+      data-prompt="Understand long-term business strategy, risk management, and growth planning.">
+      <i class="fas fa-clipboard"></i> Copy Prompt
+    </button>
+  </div>
+
+  <!-- Module 8 -->
+  <div class="card p-4">
+    <h2 class="font-bold text-lg mb-2">Module 8 – Entrepreneurship & Innovation</h2>
+    <iframe class="w-full aspect-video mb-3 rounded-lg"
+      src="https://www.youtube.com/embed/bPMyUQoGJms"
+      allowfullscreen></iframe>
+    <p class="text-gray-300 mb-3">Learn to innovate, launch startups, and lead new business ventures.</p>
+    <button class="btn px-4 py-2 bg-blue-400 text-black rounded copy-btn"
+      data-prompt="Learn to innovate, launch startups, and lead new business ventures.">
+      <i class="fas fa-clipboard"></i> Copy Prompt
+    </button>
+  </div>
+
+</section>
+  </section>
+
+
+  <script>
+    // Copy prompt logic
+    const totalModules = 8;
+    document.querySelectorAll(".copy-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const prompt = btn.getAttribute("data-prompt");
+        navigator.clipboard.writeText(prompt).then(() => {
+          btn.textContent = "Copied ✅";
+          setTimeout(() => btn.innerHTML = '<i class="fas fa-clipboard"></i> Copy Prompt', 2000);
+
+          // Update progress
+          const progressBar = document.getElementById("progress");
+          let currentWidth = parseInt(progressBar.style.width) || 0;
+          let increment = 100 / totalModules;
+          progressBar.style.width = Math.min(currentWidth + increment, 100) + "%";
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
