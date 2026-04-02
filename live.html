@@ -2,262 +2,152 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AIT Live Session</title>
+<title>AIT Attendance Register</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
 <style>
 body {
   margin: 0;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   background: #0b0f1a;
   color: #fff;
 }
 
 header {
-  padding: 20px;
   text-align: center;
+  padding: 20px;
   background: linear-gradient(90deg, #000428, #004e92);
 }
 
-h1 { color: #ff4fd8; }
+h1 { color: #ff4fd8; margin-bottom: 5px; }
+p.note { color: #ccc; font-size: 14px; }
 
 .container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-}
-
-.card {
+  max-width: 600px;
+  margin: 20px auto;
   background: #11162a;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  padding: 25px;
+  border-radius: 12px;
 }
 
-/* GRID INSTRUCTIONS */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-  gap: 10px;
-}
-
-.step {
-  background: #1f2a48;
-  padding: 15px;
-  border-radius: 8px;
-  text-align: center;
-}
-
+label { display: block; margin-top: 15px; font-size: 14px; }
 input, select {
   width: 100%;
-  padding: 10px;
-  margin: 6px 0;
-  border-radius: 6px;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 8px;
   border: none;
   background: #1f2a48;
   color: #fff;
+  font-size: 15px;
 }
 
 button {
-  background: #ff4fd8;
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 16px;
   border: none;
-  padding: 10px;
-  border-radius: 6px;
-  color: white;
-  cursor: pointer;
-  width: 100%;
-}
-
-.video-wrapper iframe {
-  width: 100%;
-  height: 400px;
   border-radius: 10px;
+  background: #ff4fd8;
+  color: #000;
+  cursor: pointer;
 }
 
-.like-btn {
-  border-radius: 30px;
+button:hover { opacity: 0.9; }
+
+.buttons-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 25px;
 }
 
-.comment {
-  margin: 5px 0;
-  padding: 8px;
-  border-radius: 6px;
+.buttons-group a {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #000;
+  background: #25D366;
 }
 
-.user { background: #1f2a48; }
-.ai { background: #2b1b3d; color: #ff9cf0; }
-
-.comments-feed {
-  max-height: 200px;
-  overflow-y: auto;
+.buttons-group a:hover {
+  opacity: 0.9;
 }
 </style>
 </head>
-
 <body>
 
 <header>
-<h1>Africa Institution of Technology – LIVE</h1>
-<p id="datetime"></p>
+  <h1>Africa Institution of Technology</h1>
+  <p class="note">All online classes are hosted through Google Meet. Links are shared on the Africa Institution WhatsApp page/group.</p>
 </header>
 
 <div class="container">
+  <h2>🎓 Attendance Register</h2>
 
-<!-- GRID INSTRUCTIONS -->
-<div class="card grid">
-  <div class="step">1️⃣ Fill Attendance</div>
-  <div class="step">2️⃣ Submit to WhatsApp</div>
-  <div class="step">3️⃣ Join Live Class</div>
-</div>
+  <label>Name</label>
+  <input type="text" id="name" placeholder="Full Name & Surname">
 
-<!-- ATTENDANCE -->
-<div class="card">
-<h3>🎓 Mark Attendance</h3>
+  <label>Student ID</label>
+  <input type="text" id="studentId" placeholder="6-digit ID" maxlength="6">
 
-<input type="text" id="name" placeholder="Full Name & Surname">
+  <label>Course</label>
+  <select id="course">
+    <option value="">Select Course</option>
+    <option>Project Management Technology</option>
+    <option>Construction Technology</option>
+    <option>Logo Design</option>
+    <option>Visual Design</option>
+    <option>Graphic Design</option>
+    <option>Frontend Development</option>
+    <option>Backend Development</option>
+    <option>Full Stack Development</option>
+    <option>Administration Technology</option>
+    <option>Business Management</option>
+    <option>Admin Technologist</option>
+  </select>
 
-<input type="text" id="studentId" placeholder="Student ID (6 digits)" maxlength="6">
+  <button onclick="submitAttendance()">Submit Attendance</button>
 
-<select id="course" onchange="setDepartment()">
-<option value="">Select Course</option>
-<option value="Frontend Development">Frontend Development</option>
-<option value="Logo Design">Logo Design</option>
-<option value="Construction Technology">Construction Technology</option>
-<option value="Administration Technology">Administration Technology</option>
-<option value="Business Management">Business Management</option>
-</select>
-
-<input type="text" id="department" placeholder="Department" readonly>
-
-<button onclick="submitAttendance()">Submit Attendance</button>
-</div>
-
-<!-- JOIN BUTTON -->
-<div class="card">
-<button id="joinBtn" onclick="joinClass()" disabled>🎥 Join Live Class</button>
-</div>
-
-<!-- VIDEO -->
-<div class="video-wrapper" id="videoSection" style="display:none;">
-<iframe src="https://www.youtube.com/embed/live_stream?channel=CHANNEL_ID"></iframe>
-</div>
-
-<!-- ENGAGEMENT -->
-<div class="card">
-<button class="like-btn" onclick="addLike()">❤️ Like <span id="likes">0</span></button>
-</div>
-
-<!-- COMMENTS -->
-<div class="card">
-<div class="comments-feed" id="comments"></div>
-<input type="text" id="autoComment" readonly>
-<button onclick="sendComment()">Send</button>
-</div>
-
+  <div class="buttons-group">
+    <a href="https://chat.whatsapp.com/LGDjhKrYUBs6Nbx2BdA0my?mode=gi_t" target="_blank">
+      💬 Join Africa Institution WhatsApp Group
+    </a>
+    <a href="https://whatsapp.com/channel/0029Vb7sIyFFsn0npbQl6s0i" target="_blank">
+      📢 Follow Africa Institution Updates Channel
+    </a>
+  </div>
 </div>
 
 <script>
-// TIME
-setInterval(() => {
-  document.getElementById("datetime").innerText = new Date().toLocaleString();
-}, 1000);
-
-// COURSE → DEPT
-function setDepartment() {
-  const map = {
-    "Frontend Development": "DEP-SD",
-    "Logo Design": "DEP-DES",
-    "Construction Technology": "DEP-CON",
-    "Administration Technology": "DEP-ABM",
-    "Business Management": "DEP-ABM"
-  };
-
-  const course = document.getElementById("course").value;
-  document.getElementById("department").value = map[course] || "";
-}
-
-// SUBMIT
 function submitAttendance() {
-  const name = document.getElementById("name").value;
-  const id = document.getElementById("studentId").value;
-  const course = document.getElementById("course").value;
-  const dept = document.getElementById("department").value;
-  const time = new Date().toLocaleString();
+  const name = document.getElementById('name').value;
+  const id = document.getElementById('studentId').value;
+  const course = document.getElementById('course').value;
 
-  if (!name || !id || !course) {
-    alert("Fill all fields");
+  if(!name || !id || !course) {
+    alert("Please fill all fields!");
     return;
   }
 
-  if (!/^\d{6}$/.test(id)) {
-    alert("Student ID must be exactly 6 digits");
+  if(!/^\d{6}$/.test(id)) {
+    alert("Student ID must be 6 digits!");
     return;
   }
 
-  const msg = `🎓 AIT ATTENDANCE
+  const msg = `🎓 AIT Attendance
 Name: ${name}
 ID: ${id}
-Course: ${course}
-Department: ${dept}
-Date: ${time}`;
+Course: ${course}`;
 
-  window.open(`https://wa.me/27606614909?text=${encodeURIComponent(msg)}`);
-
-  // ENABLE JOIN BUTTON
-  document.getElementById("joinBtn").disabled = false;
+  // Open WhatsApp link to submit
+  window.open(`https://wa.me/27606614909?text=${encodeURIComponent(msg)}`, "_blank");
+  alert("Attendance submitted! ✅");
 }
-
-// JOIN CLASS
-function joinClass() {
-  document.getElementById("videoSection").style.display = "block";
-}
-
-// LIKE
-let likes = 0;
-function addLike() {
-  likes++;
-  document.getElementById("likes").innerText = likes;
-}
-
-// COMMENTS
-const userComments = [
-"🔥 Powerful lesson",
-"This is deep",
-"AIT 🔥",
-"I understand now"
-];
-
-const aiReplies = [
-"Good insight 🚀",
-"Keep learning!",
-"You're improving 💡"
-];
-
-function autoFill() {
-  document.getElementById("autoComment").value =
-    userComments[Math.floor(Math.random() * userComments.length)];
-}
-
-function sendComment() {
-  const box = document.getElementById("comments");
-  const text = document.getElementById("autoComment").value;
-
-  if (!text) return;
-
-  box.innerHTML += `<div class="comment user">${text}</div>`;
-
-  setTimeout(() => {
-    const reply = aiReplies[Math.floor(Math.random() * aiReplies.length)];
-    box.innerHTML += `<div class="comment ai">🤖 ${reply}</div>`;
-    box.scrollTop = box.scrollHeight;
-  }, 500);
-
-  autoFill();
-}
-
-autoFill();
 </script>
 
 </body>

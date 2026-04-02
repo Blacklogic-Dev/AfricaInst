@@ -13,197 +13,206 @@ body {
   color: #fff;
 }
 
-/* Banner */
+/* HEADER */
 .banner {
-  width: 100%;
-  height: 300px;
-  background: url("day.jpg") center/cover no-repeat;
-}
-
-/* Container */
-.container {
-  max-width: 700px;
-  margin: -60px auto 50px;
-  background: #11162a;
-  padding: 25px;
-  border-radius: 15px;
-}
-
-/* Header */
-h1 {
+  padding: 30px;
   text-align: center;
-  color: #ff4fd8;
+  background: linear-gradient(135deg,#000,#1a0033);
 }
 
-/* Toggle */
-.toggle {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
+.banner h1 {
+  font-size: 2rem;
+  background: linear-gradient(90deg,#ff4fd8,#6f5cff);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
-.toggle button {
-  flex: 1;
+.banner p {
+  color: #ccc;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+/* SELECT */
+select {
+  width: 100%;
   padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
   border: none;
-  cursor: pointer;
   background: #1f2a48;
   color: #fff;
-  font-size: 15px;
 }
 
-.toggle button.active {
-  background: linear-gradient(90deg, #ff4fd8, #6f5cff);
+/* PROMPT */
+textarea {
+  width: 100%;
+  height: 160px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  background: #1f2a48;
+  color: #fff;
+  padding: 12px;
 }
 
-/* Form */
-label {
-  display: block;
+/* BUTTON */
+button {
   margin-top: 15px;
-  font-size: 14px;
-}
-
-input, select {
-  width: 100%;
-  padding: 12px;
-  margin-top: 6px;
-  border-radius: 8px;
+  padding: 12px 20px;
   border: none;
-  background: #1f2a48;
-  color: #fff;
-  font-size: 15px;
-}
-
-button.submit {
-  width: 100%;
-  margin-top: 25px;
-  padding: 15px;
-  font-size: 16px;
-  border: none;
-  border-radius: 30px;
-  background: linear-gradient(90deg, #ff4fd8, #6f5cff);
+  border-radius: 25px;
+  background: linear-gradient(90deg,#ff4fd8,#6f5cff);
   color: #fff;
   cursor: pointer;
-}
-
-.hidden {
-  display: none;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Banner -->
-<div class="banner"></div>
+<div class="banner">
+  <h1>🚀 AI Studio</h1>
+  <p>Select your course to generate a smart AI learning prompt</p>
+</div>
 
 <div class="container">
-<h1>Africa AI Studio </h1>
 
-<!-- Toggle -->
-<div class="toggle">
-  <button id="devBtn" class="active" onclick="showDeveloper()">Developer</button>
-  <button id="designBtn" onclick="showDesign()">Design</button>
-</div>
+<!-- DEPARTMENT -->
+<label>Department</label>
+<select id="department" onchange="loadCourses()">
+  <option value="">Select Department</option>
+  <option value="construction">Construction Technology</option>
+  <option value="design">Software Design and Innovation</option>
+  <option value="development">Software Development and Engineering</option>
+  <option value="business">Administration & Business Management</option>
+</select>
 
-<!-- Common Fields -->
-<label>Name</label>
-<input type="text" id="name" placeholder="Full Name">
+<!-- COURSE -->
+<label>Course</label>
+<select id="course"></select>
 
-<label>Age</label>
-<input type="number" id="age" value="21">
+<!-- PROMPT -->
+<textarea id="promptBox"></textarea>
 
-<!-- Developer Form -->
-<div id="developerForm">
-  <label>Department</label>
-  <input type="text" value="Software Development and Engineering" disabled>
+<button onclick="copyPrompt()">Copy Prompt</button>
+<button onclick="openAI()">Open AI 🚀</button>
 
-  <label>Course</label>
-  <select id="devCourse">
-    <option>Frontend Development – 2 weeks</option>
-    <option>Backend Development – 2 weeks</option>
-    <option>Full Stack Development – 2 weeks</option>
-  </select>
-</div>
-
-<!-- Design Form -->
-<div id="designForm" class="hidden">
-  <label>Department</label>
-  <input type="text" value="Software Design and Innovation" disabled>
-
-  <label>Course</label>
-  <select id="designCourse">
-    <option>Logo Design – 2 weeks</option>
-    <option>Visual Design – 2 weeks</option>
-    <option>Graphic Design – 2 weeks</option>
-  </select>
-</div>
-
-<button class="submit" onclick="openAI()">Open AI Studio</button>
 </div>
 
 <script>
-let mode = "developer";
+const courses = {
+  construction: [
+    "Project Management Technology",
+    "Construction Technology (AutoCAD & Civil Engineering Fundamentals)"
+  ],
+  design: [
+    "Logo Design",
+    "Visual Design",
+    "Graphic Design"
+  ],
+  development: [
+    "Frontend Development",
+    "Backend Development",
+    "Full Stack Development"
+  ],
+  business: [
+    "Administration Technology",
+    "Business Management",
+    "Admin Technologist"
+  ]
+};
 
-function showDeveloper() {
-  mode = "developer";
-  document.getElementById("developerForm").classList.remove("hidden");
-  document.getElementById("designForm").classList.add("hidden");
-  document.getElementById("devBtn").classList.add("active");
-  document.getElementById("designBtn").classList.remove("active");
+function loadCourses() {
+  const dept = document.getElementById("department").value;
+  const courseSelect = document.getElementById("course");
+  courseSelect.innerHTML = "";
+
+  courses[dept].forEach(c => {
+    let opt = document.createElement("option");
+    opt.textContent = c;
+    courseSelect.appendChild(opt);
+  });
+
+  generatePrompt();
 }
 
-function showDesign() {
-  mode = "design";
-  document.getElementById("designForm").classList.remove("hidden");
-  document.getElementById("developerForm").classList.add("hidden");
-  document.getElementById("designBtn").classList.add("active");
-  document.getElementById("devBtn").classList.remove("active");
-}
+document.getElementById("course").addEventListener("change", generatePrompt);
 
-function openAI() {
-  const name = document.getElementById("name").value;
-  const age = document.getElementById("age").value;
+function generatePrompt() {
+  const dept = document.getElementById("department").value;
+  const course = document.getElementById("course").value;
 
-  if (!name) {
-    alert("Please enter your name");
-    return;
+  if (!dept || !course) return;
+
+  let details = "";
+
+  if (dept === "construction") {
+    details = "Focus on real-world construction projects, AutoCAD designs, site planning, materials, and civil engineering fundamentals.";
   }
-
-  let department, course, url;
-
-  if (mode === "developer") {
-    department = "Software Development and Engineering";
-    course = document.getElementById("devCourse").value;
-    url = "https://chat.openai.com/";
-  } else {
-    department = "Software Design and Innovation";
-    course = document.getElementById("designCourse").value;
-    url = "https://gemini.google.com/";
+  else if (dept === "design") {
+    details = "Focus on creativity, branding, UI/UX principles, color theory, and real-world design projects.";
+  }
+  else if (dept === "development") {
+    details = "Focus on coding, debugging, building real applications, APIs, and full project deployment.";
+  }
+  else {
+    details = "Focus on administration systems, business strategies, management tools, and real-world case studies.";
   }
 
   const prompt = `
 Hi AI,
 
-My name is ${name}, I am ${age} years old.
-I am a student at Africa Institution of Technology (AIT).
+I am a student at Africa Institution of Technology.
 
-Department: ${department}
+Department: ${dept.toUpperCase()}
 Course: ${course}
 
-Africa Institution of Technology operates under
-BlackLogic Technologies Hardware and Projects Pty Ltd,
-founded by BlackLogic Mkholo.
+Please teach me step-by-step for 2 weeks.
 
-Please teach me step-by-step,
-use real-world examples,
-and guide me to professional mastery.
+Requirements:
+- ${details}
+- Give practical projects
+- Explain concepts clearly
+- Provide real-world examples
+- Help me build professional skills
+
+Guide me until I master this field.
+
+Powered by BlackLogic Technologies 🚀
 `;
 
-  navigator.clipboard.writeText(prompt).then(() => {
-    alert("AI prompt copied! Paste it into the AI assistant 🚀");
-    window.open(url, "_blank");
-  });
+  document.getElementById("promptBox").value = prompt;
+}
+
+function copyPrompt() {
+  const text = document.getElementById("promptBox");
+  text.select();
+  document.execCommand("copy");
+  alert("Prompt copied 🚀");
+}
+
+function openAI() {
+  const dept = document.getElementById("department").value;
+
+  let url = "";
+
+  if (dept === "business") {
+    url = "https://copilot.microsoft.com/";
+  }
+  else if (dept === "construction" || dept === "development") {
+    url = "https://chat.openai.com/";
+  }
+  else {
+    url = "https://gemini.google.com/";
+  }
+
+  window.open(url,"_blank");
 }
 </script>
 

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Workspace | AIT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- FONT AWESOME -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0f1a;
+  color: #fff;
+}
+
+/* HEADER */
+.header {
+  padding: 30px;
+  text-align: center;
+  background: linear-gradient(135deg,#000,#1a0033);
+}
+
+.header h1 {
+  font-size: 2rem;
+  background: linear-gradient(90deg,#ff4fd8,#6f5cff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.header p {
+  color: #ccc;
+}
+
+/* GRID */
+.grid {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 25px;
+}
+
+/* CARD */
+.card {
+  background: #11162a;
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  border: 1px solid rgba(111,92,255,0.3);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(111,92,255,0.4);
+}
+
+/* ICON */
+.icon {
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+
+/* COLORS PER TOOL */
+.word { color: #2b7cff; }
+.excel { color: #21a366; }
+.powerpoint { color: #ff6b35; }
+.copilot { color: #a855f7; }
+
+/* TEXT */
+.card h2 {
+  margin-top: 10px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* BUTTON */
+button {
+  margin-top: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(90deg,#ff4fd8,#6f5cff);
+  color: #fff;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>💼 Admin Workspace</h1>
+  <p>Your digital office powered by smart tools & AI</p>
+</div>
+
+<div class="grid">
+
+<!-- WORD -->
+<div class="card">
+  <i class="fas fa-file-word icon word"></i>
+  <h2>Word</h2>
+  <p>
+    Create documents, reports, letters, and official files. 
+    Used daily for communication and administration tasks.
+  </p>
+  <button onclick="openTool('word')">Open</button>
+</div>
+
+<!-- EXCEL -->
+<div class="card">
+  <i class="fas fa-file-excel icon excel"></i>
+  <h2>Excel</h2>
+  <p>
+    Manage data, budgets, and calculations. 
+    Essential for analysis, planning, and business decisions.
+  </p>
+  <button onclick="openTool('excel')">Open</button>
+</div>
+
+<!-- POWERPOINT -->
+<div class="card">
+  <i class="fas fa-file-powerpoint icon powerpoint"></i>
+  <h2>PowerPoint</h2>
+  <p>
+    Build presentations, project reports, and business pitches. 
+    Great for meetings and communication.
+  </p>
+  <button onclick="openTool('powerpoint')">Open</button>
+</div>
+
+<!-- COPILOT -->
+<div class="card">
+  <i class="fas fa-aichip"></i>
+  <h2>Microsoft Copilot</h2>
+  <p>
+    AI assistant that writes documents, analyzes data, and automates work. 
+    It transforms administration into a faster and smarter system.
+  </p>
+  <button onclick="openTool('copilot')">Open</button>
+</div>
+
+</div>
+
+<script>
+function openTool(tool) {
+  let url = "";
+
+  if (tool === "word") {
+    url = "https://www.office.com/launch/word";
+  }
+  else if (tool === "excel") {
+    url = "https://www.office.com/launch/excel";
+  }
+  else if (tool === "powerpoint") {
+    url = "https://www.office.com/launch/powerpoint";
+  }
+  else {
+    url = "https://copilot.microsoft.com/";
+  }
+
+  window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>

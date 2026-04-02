@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Civils.ai Studio | BlackLogic</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0b0b0b;
+  color: white;
+}
+
+/* BANNER */
+.banner {
+  height: 180px;
+  background: linear-gradient(120deg, #111, #1f1f1f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: gold;
+}
+
+/* INTRO */
+.intro {
+  text-align: center;
+  padding: 20px;
+  font-size: 15px;
+  color: #ccc;
+}
+
+/* CONTAINER */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.card:hover {
+  background: #1a1a1a;
+  transform: translateY(-5px);
+}
+
+.card i {
+  font-size: 25px;
+  margin-bottom: 10px;
+  color: gold;
+}
+
+/* BUTTON */
+.open-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 20px;
+  background: gold;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* TOOL GRID */
+.tools {
+  padding: 20px;
+}
+
+.tool-box {
+  background: #111;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.tool-box button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  background: gold;
+  color: black;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+td, th {
+  border: 1px solid #333;
+  padding: 8px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BANNER -->
+<div class="banner">
+  🏗️ Civils.ai Studio
+</div>
+
+<!-- INTRO -->
+<p class="intro">
+  Replace manual structural analysis with AI-powered workflows. Design, analyze, calculate, and visualize engineering systems using <strong>Civils.ai</strong> integrated tools.
+</p>
+
+<!-- FEATURES -->
+<div class="container">
+  <div class="card">
+    <i class="fas fa-ruler-combined"></i>
+    <p>Define structural elements: beams, columns, supports.</p>
+  </div>
+
+  <div class="card">
+    <i class="fas fa-cogs"></i>
+    <p>Apply loads and compute reactions & safety factors.</p>
+  </div>
+
+  <div class="card">
+    <i class="fas fa-chart-line"></i>
+    <p>Auto-generate moment, shear & displacement diagrams.</p>
+  </div>
+
+  <div class="card">
+    <i class="fas fa-file-export"></i>
+    <p>Export results for reports & tender submissions.</p>
+  </div>
+</div>
+
+<!-- MAIN BUTTON -->
+<button class="open-btn" onclick="openCivils()">
+  🚀 Open Civils.ai
+</button>
+
+
+
+<!-- SCRIPT -->
+<script>
+
+function openCivils(){
+  window.open('https://civils.ai/free-civil-engineering-design-software','_blank');
+}
+
+function openMap(){
+  window.open('https://maps.google.com','_blank');
+}
+
+function openAutoCAD(){
+  window.open('https://web.autocad.com','_blank');
+}
+
+function openViewer(){
+  window.open('https://viewer.autodesk.com','_blank');
+}
+
+function calculateDistance(){
+  let x1 = parseFloat(document.getElementById("x1").value);
+  let y1 = parseFloat(document.getElementById("y1").value);
+  let x2 = parseFloat(document.getElementById("x2").value);
+  let y2 = parseFloat(document.getElementById("y2").value);
+
+  let distance = Math.sqrt((x2-x1)**2 + (y2-y1)**2);
+
+  document.getElementById("result").innerText = "Distance: " + distance.toFixed(2);
+}
+
+</script>
+
+</body>
+</html>
