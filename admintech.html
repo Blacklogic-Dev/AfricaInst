@@ -26,19 +26,13 @@
     .btn {
       font-weight: bold;
     }
-    .progress-bar {
-      background: #222;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .progress {
-      background: #00ff00;
-      width: 0%;
-      height: 20px;
-      transition: width 0.5s;
-    }
     iframe {
       border-radius: 12px;
+    }
+    a.btn {
+      display: inline-block;
+      text-decoration: none;
+      text-align: center;
     }
   </style>
 </head>
@@ -57,8 +51,8 @@
   <!-- ================= PROGRESS ================= -->
   <section class="max-w-4xl mx-auto mt-8 px-4">
     <p class="mb-2">Course Progress:</p>
-    <div class="progress-bar">
-      <div class="progress" id="progress"></div>
+    <div class="bg-gray-800 rounded-lg overflow-hidden">
+      <div class="bg-green-500 h-5 w-0" id="progress"></div>
     </div>
   </section>
 
@@ -66,15 +60,10 @@
   <section class="max-w-4xl mx-auto mt-6 px-4">
     <p class="text-pink-400 font-bold mb-2">Instructions:</p>
     <ul class="list-decimal list-inside text-gray-300 mb-4">
-      <li>Watch the video lessons completely</li>
-      <li>Copy the Module instructions using the clipboard button</li>
-      <li>Click the AI button, paste the prompt, and start learning</li>
+      <li>Watch each video lesson completely</li>
+      <li>Download or view the PDF module notes for reference</li>
+      <li>Mark your progress after completing a module</li>
     </ul>
-    <button class="btn px-4 py-2 bg-green-500 text-black rounded flex items-center gap-2" 
-            onclick="window.open('https://chat.openai.com', '_blank')">
-      <i class="fas fa-microchip"></i> Open AI Assistant
-    </button>
-  </section>
   </section>
 
   <!-- ================= MODULES ================= -->
@@ -82,72 +71,121 @@
 
 <!-- Module 1 – Office Software Essentials -->
 <div class="card p-4">
-  <h2 class="font-bold text-lg mb-2">Module 1 – Office Software Essentials <span class="text-gray-400">(YouTube)</span></h2>
+  <h2 class="font-bold text-lg mb-2">Module 1 – Office Software Essentials <span class="text-gray-400">(YouTube + Notes)</span></h2>
   <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/yFbZc4i2Nww" allowfullscreen></iframe>
   <p class="text-gray-300 mb-3">Learn essential office software tools like Word, Excel, and Outlook for productivity.</p>
-  <div class="flex gap-3">
-    <button class="btn px-4 py-2 bg-orange-400 text-black rounded copy-btn" 
-            data-prompt="Learn essential office software tools like Word, Excel, and Outlook for productivity.">
-      <i class="fas fa-clipboard"></i> Copy Prompt
-    </button>
-  </div>
+  <a href="modules/module1_notes.pdf" target="_blank" class="btn px-4 py-2 bg-orange-400 text-black rounded flex items-center gap-2">
+    <i class="fas fa-file-pdf"></i> View Module Notes
+  </a>
 </div>
 
 <!-- Module 2 – Automation & Workflow -->
 <div class="card p-4">
-  <h2 class="font-bold text-lg mb-2">Module 2 – Automation & Workflow <span class="text-gray-400">(YouTube)</span></h2>
+  <h2 class="font-bold text-lg mb-2">Module 2 – Automation & Workflow <span class="text-gray-400">(YouTube + Notes)</span></h2>
   <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/PZTwBPnHNMQ" allowfullscreen></iframe>
   <p class="text-gray-300 mb-3">Understand office workflow automation and tools for task management.</p>
-  <div class="flex gap-3">
-    <button class="btn px-4 py-2 bg-orange-400 text-black rounded copy-btn" 
-            data-prompt="Understand office workflow automation and tools for task management.">
-      <i class="fas fa-clipboard"></i> Copy Prompt
-    </button>
-  </div>
+  <a href="modules/module2_notes.pdf" target="_blank" class="btn px-4 py-2 bg-orange-400 text-black rounded flex items-center gap-2">
+    <i class="fas fa-file-pdf"></i> View Module Notes
+  </a>
 </div>
 
 <!-- Module 3 – Data Management & Reporting -->
 <div class="card p-4">
-  <h2 class="font-bold text-lg mb-2">Module 3 – Data Management & Reporting <span class="text-gray-400">(YouTube)</span></h2>
+  <h2 class="font-bold text-lg mb-2">Module 3 – Data Management & Reporting <span class="text-gray-400">(YouTube + Notes)</span></h2>
   <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/_hTiCavrnhU" allowfullscreen></iframe>
   <p class="text-gray-300 mb-3">Learn how to manage office data, generate reports, and analyze information efficiently.</p>
-  <div class="flex gap-3">
-    <button class="btn px-4 py-2 bg-orange-400 text-black rounded copy-btn" 
-            data-prompt="Learn how to manage office data, generate reports, and analyze information efficiently.">
-      <i class="fas fa-clipboard"></i> Copy Prompt
-    </button>
-  </div>
+  <a href="modules/module3_notes.pdf" target="_blank" class="btn px-4 py-2 bg-orange-400 text-black rounded flex items-center gap-2">
+    <i class="fas fa-file-pdf"></i> View Module Notes
+  </a>
 </div>
 
 <!-- Module 4 – Office Security & Compliance -->
 <div class="card p-4">
-  <h2 class="font-bold text-lg mb-2">Module 4 – Office Security & Compliance <span class="text-gray-400">(YouTube)</span></h2>
+  <h2 class="font-bold text-lg mb-2">Module 4 – Office Security & Compliance <span class="text-gray-400">(YouTube + Notes)</span></h2>
   <iframe class="w-full h-60 mb-3" src="https://www.youtube.com/embed/bww0DuI3ndI" allowfullscreen></iframe>
   <p class="text-gray-300 mb-3">Train in office security, compliance protocols, and safe handling of information.</p>
-  <div class="flex gap-3">
-    <button class="btn px-4 py-2 bg-orange-400 text-black rounded copy-btn" 
-            data-prompt="Train in office security, compliance protocols, and safe handling of information.">
-      <i class="fas fa-clipboard"></i> Copy Prompt
-    </button>
+  <a href="modules/module4_notes.pdf" target="_blank" class="btn px-4 py-2 bg-orange-400 text-black rounded flex items-center gap-2">
+    <i class="fas fa-file-pdf"></i> View Module Notes
+  </a>
+</div>
+<!-- ================= WEEK 2 ================= -->
+<section class="max-w-6xl mx-auto mt-10 px-4">
+
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <h2 class="text-3xl font-bold text-orange-400">Week 2 – AI in Administration</h2>
+    <p class="text-gray-400 mt-2">
+      Learn how AI is transforming office administration, productivity, and Microsoft 365 workflows.
+    </p>
   </div>
+
+  <!-- Grid -->
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+<!-- Module 1 -->
+<div class="card p-4 hover:scale-105 transition">
+  <h3 class="font-bold mb-2">Microsoft Copilot Introduction</h3>
+  <iframe class="w-full h-40 mb-3 rounded"
+    src="https://www.youtube.com/embed/d-CuF6dlqLg"
+    allowfullscreen></iframe>
+  <p class="text-sm text-gray-400 mb-3">Learn how Microsoft Copilot enhances productivity using AI.</p>
+  <a href="modules/week2_module1_notes.pdf"
+     class="btn block text-center bg-orange-400 text-black py-2 rounded">
+    View Notes
+  </a>
 </div>
 
+<!-- Module 2 -->
+<div class="card p-4 hover:scale-105 transition">
+  <h3 class="font-bold mb-2">Ethics of AI</h3>
+  <iframe class="w-full h-40 mb-3 rounded"
+    src="https://www.youtube.com/embed/ki9ZluqTsuk"
+    allowfullscreen></iframe>
+  <p class="text-sm text-gray-400 mb-3">Understand responsible use of AI in workplaces.</p>
+  <a href="modules/week2_module2_notes.pdf"
+     class="btn block text-center bg-orange-400 text-black py-2 rounded">
+    View Notes
+  </a>
+</div>
+
+<!-- Module 3 -->
+<div class="card p-4 hover:scale-105 transition">
+  <h3 class="font-bold mb-2">Admin with AI</h3>
+  <iframe class="w-full h-40 mb-3 rounded"
+    src="https://www.youtube.com/embed/rMalGm0tBOY"
+    allowfullscreen></iframe>
+  <p class="text-sm text-gray-400 mb-3">Automate administrative tasks using AI tools.</p>
+  <a href="modules/week2_module3_notes.pdf"
+     class="btn block text-center bg-orange-400 text-black py-2 rounded">
+    View Notes
+  </a>
+</div>
+
+<!-- Module 4 -->
+<div class="card p-4 hover:scale-105 transition">
+  <h3 class="font-bold mb-2">Microsoft 365 & Copilot</h3>
+  <iframe class="w-full h-40 mb-3 rounded"
+    src="https://www.youtube.com/embed/_hTiCavrnhU"
+    allowfullscreen></iframe>
+  <p class="text-sm text-gray-400 mb-3">Master Microsoft 365 tools powered by Copilot AI.</p>
+  <a href="modules/week2_module4_notes.pdf"
+     class="btn block text-center bg-orange-400 text-black py-2 rounded">
+    View Notes
+  </a>
+</div>
+
+</section>
   </section>
 
   <script>
-    // Copy prompt logic
-    document.querySelectorAll(".copy-btn").forEach(btn => {
+    // Module progress logic
+    const moduleButtons = document.querySelectorAll(".btn[href^='modules/']");
+    moduleButtons.forEach((btn, idx) => {
       btn.addEventListener("click", () => {
-        const prompt = btn.getAttribute("data-prompt");
-        navigator.clipboard.writeText(prompt).then(() => {
-          btn.textContent = "Copied ✅";
-          setTimeout(() => btn.innerHTML = '<i class="fas fa-clipboard"></i> Copy Prompt', 2000);
-          // Update progress
-          let progressBar = document.getElementById("progress");
-          let currentWidth = parseInt(progressBar.style.width) || 0;
-          let newWidth = Math.min(currentWidth + 25, 100); // 4 modules → 25% each
-          progressBar.style.width = newWidth + "%";
-        });
+        const progressBar = document.getElementById("progress");
+        let currentWidth = parseInt(progressBar.style.width) || 0;
+        let increment = 25; // 4 modules → 25% each
+        let newWidth = Math.min(currentWidth + increment, 100);
+        progressBar.style.width = newWidth + "%";
       });
     });
   </script>
